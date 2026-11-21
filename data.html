@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KEMDIKTISAINTEK - DETAIL SK</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-page: #ffffff;
+      --bg-card: #ffffff;
+      --border-soft: #e6e8eb;
+      --border-row: #eceef1;
+      --accent-orange: #e59838;
+      --text-brand: #1f2429;
+      --text-heading: #4a5157;
+      --text-label: #6d747b;
+      --text-value: #3d4349;
+      --text-menu: #5c636a;
+      --status-active: #2e9e62;
+      --btn-primary: #2563eb;
+      --btn-primary-hover: #1d4ed8;
+      --btn-accent: #e59838;
+      --btn-accent-hover: #ce8224;
+      --btn-danger: #dc2626;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background-color: var(--bg-page);
+      color: var(--text-value);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ==================== HEADER ==================== */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background-color: #ffffff;
+      border-bottom: 2px solid var(--accent-orange);
+    }
+
+    .topbar-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 13px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .topbar-brand {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: var(--text-brand);
+      text-transform: uppercase;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .admin-pill {
+      display: none;
+      font-size: 12px;
+      font-weight: 600;
+      color: #065f46;
+      background-color: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      border-radius: 6px;
+      padding: 4px 10px;
+    }
+
+    .hamburger-btn {
+      width: 44px;
+      height: 36px;
+      border: 1px solid #d5d9df;
+      border-radius: 6px;
+      background-color: #ffffff;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .hamburger-btn:hover {
+      background-color: #f9fafb;
+    }
+
+    .hamburger-btn span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background-color: #6b7280;
+      border-radius: 2px;
+    }
+
+    /* ==================== DRAWER MENU ==================== */
+    .drawer-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(15, 23, 42, 0.32);
+      z-index: 50;
+    }
+
+    .drawer-overlay.open {
+      display: block;
+    }
+
+    .drawer-panel {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 276px;
+      max-width: 84vw;
+      height: 100vh;
+      background-color: #ffffff;
+      border-left: 1px solid var(--border-soft);
+      border-bottom: 2px solid var(--accent-orange);
+      z-index: 60;
+      padding: 18px 16px 28px;
+      overflow-y: auto;
+      transition: right 0.22s ease;
+    }
+
+    .drawer-panel.open {
+      right: 0;
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 14px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--border-row);
+    }
+
+    .drawer-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-brand);
+      letter-spacing: 0.03em;
+    }
+
+    .drawer-close {
+      border: 1px solid #d5d9df;
+      background: #ffffff;
+      color: #4b5563;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .menu-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .menu-btn {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--text-menu);
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .menu-btn:hover,
+    .menu-btn.active {
+      background-color: #f3f4f6;
+      color: #1f2937;
+    }
+
+    .menu-btn-left {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .menu-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      color: var(--text-menu);
+    }
+
+    .submenu-list {
+      display: none;
+      list-style: none;
+      padding-left: 38px;
+      margin-top: 2px;
+      margin-bottom: 6px;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .submenu-list.open {
+      display: flex;
+    }
+
+    .submenu-btn {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-radius: 6px;
+      padding: 7px 10px;
+      font-size: 14px;
+      color: var(--text-menu);
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .submenu-btn:hover {
+      background-color: #f3f4f6;
+      color: #1f2937;
+    }
+
+    /* ==================== KONTEN UTAMA ==================== */
+    .page-wrapper {
+      max-width: 660px;
+      margin: 0 auto;
+      padding: 26px 16px 56px;
+    }
+
+    .view-box {
+      display: none;
+    }
+
+    .view-box.active {
+      display: block;
+    }
+
+    /* Halaman DETAIL SK */
+    .detail-title {
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--text-heading);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .detail-status {
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--status-active);
+      margin-bottom: 20px;
+    }
+
+    .detail-status.inactive {
+      color: var(--btn-danger);
+    }
+
+    .sk-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .sk-row {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-row);
+    }
+
+    .sk-row:last-child {
+      border-bottom: none;
+    }
+
+    .sk-label {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-label);
+      margin-bottom: 3px;
+    }
+
+    .sk-val {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-value);
+      word-break: break-word;
+    }
+
+    /* Baris Aksi Khusus Admin Saat Login */
+    .admin-quick-panel {
+      display: none;
+      margin-top: 14px;
+      padding: 12px 14px;
+      border: 1px solid #fde68a;
+      background-color: #fffbeb;
+      border-radius: 6px;
+    }
+
+    /* ==================== FORM & PANEL ADMIN ==================== */
+    .section-heading {
+      font-size: 21px;
+      font-weight: 600;
+      color: var(--text-heading);
+      margin-bottom: 14px;
+    }
+
+    .card-box {
+      border: 1px solid var(--border-soft);
+      border-radius: 8px;
+      padding: 16px;
+      background-color: #ffffff;
+      margin-bottom: 16px;
+    }
+
+    .field-group {
+      margin-bottom: 12px;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 5px;
+    }
+
+    .field-input {
+      width: 100%;
+      padding: 9px 12px;
+      font-size: 14px;
+      font-family: inherit;
+      color: #1f2937;
+      background-color: #ffffff;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+    }
+
+    .field-input:focus {
+      outline: none;
+      border-color: var(--accent-orange);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 600px) {
+      .form-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 13px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-blue {
+      background-color: var(--btn-primary);
+      color: #ffffff;
+    }
+
+    .btn-blue:hover {
+      background-color: var(--btn-primary-hover);
+    }
+
+    .btn-amber {
+      background-color: var(--btn-accent);
+      color: #ffffff;
+    }
+
+    .btn-amber:hover {
+      background-color: var(--btn-accent-hover);
+    }
+
+    .btn-light {
+      background-color: #ffffff;
+      color: #374151;
+      border-color: #d1d5db;
+    }
+
+    .btn-light:hover {
+      background-color: #f9fafb;
+    }
+
+    .btn-red {
+      background-color: var(--btn-danger);
+      color: #ffffff;
+    }
+
+    .notice {
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .notice-info {
+      background-color: #eff6ff;
+      color: #1e40af;
+      border: 1px solid #bfdbfe;
+    }
+
+    .notice-ok {
+      background-color: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+
+    .notice-err {
+      background-color: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+
+    .helper-text {
+      font-size: 12px;
+      color: var(--text-label);
+      margin-top: 6px;
+      word-break: break-all;
+    }
+
+    .data-item {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid var(--border-row);
+      border-radius: 6px;
+      background-color: #fafafa;
+      margin-bottom: 10px;
+    }
+
+    .data-item-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1f2937;
+    }
+
+    .data-item-sub {
+      font-size: 12px;
+      color: var(--text-label);
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="topbar-brand" onclick="showView('detail')">KEMDIKTISAINTEK</div>
+      <div class="topbar-right">
+        <span id="adminBadge" class="admin-pill">Mode Admin</span>
+        <button type="button" class="hamburger-btn" aria-label="Menu" onclick="setDrawer(true)">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- OVERLAY & MENU DRAWER -->
+  <div id="drawerOverlay" class="drawer-overlay" onclick="setDrawer(false)"></div>
+  <aside id="drawerPanel" class="drawer-panel" aria-label="Navigasi">
+    <div class="drawer-header">
+      <span class="drawer-title">KEMDIKTISAINTEK</span>
+      <button type="button" class="drawer-close" onclick="setDrawer(false)">Tutup</button>
+    </div>
+
+    <ul class="menu-list">
+      <li>
+        <button type="button" class="menu-btn" onclick="showView('home')">
+          <span class="menu-btn-left">
+            <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3l9-8z"/>
+            </svg>
+            <span>Beranda</span>
+          </span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="menu-btn" onclick="showView('announcement')">
+          <span class="menu-btn-left">
+            <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M4 5h16a1 1 0 011 1v12a2 2 0 01-2 2H5a2 2 0 01-2-2V6a1 1 0 011-1zm3 3v3h4V8H7zm6 0v2h5V8h-5zm0 4v2h5v-2h-5zM7 13v4h4v-4H7zm6 3v1h5v-1h-5z"/>
+            </svg>
+            <span>Pengumuman</span>
+          </span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="menu-btn" onclick="showView('requirements')">
+          <span class="menu-btn-left">
+            <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+            </svg>
+            <span>Syarat</span>
+          </span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="menu-btn" onclick="showView('faq')">
+          <span class="menu-btn-left">
+            <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm.2 15.3a1.2 1.2 0 110-2.4 1.2 1.2 0 010 2.4zm1.7-5.6c-.7.5-1.1.9-1.1 1.8h-1.8c0-1.5.6-2.2 1.5-2.8.6-.4 1-.8 1-1.4 0-.7-.5-1.2-1.3-1.2-.8 0-1.3.5-1.4 1.3H8.4c.1-1.8 1.4-2.9 3.2-2.9 1.9 0 3.2 1.1 3.2 2.7 0 1.2-.6 1.9-1.9 2.5z"/>
+            </svg>
+            <span>FAQ</span>
+          </span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="menu-btn" onclick="toggleSearchSubmenu()">
+          <span class="menu-btn-left">
+            <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+              <circle cx="11" cy="11" r="6.5"/>
+              <line x1="16" y1="16" x2="21" y2="21"/>
+            </svg>
+            <span>Pencarian Data</span>
+          </span>
+          <span id="submenuArrow" style="font-size: 11px;">&#9660;</span>
+        </button>
+        <ul id="searchSubmenu" class="submenu-list">
+          <li><button type="button" class="submenu-btn" onclick="showView('search-sk')">Pencarian SK</button></li>
+          <li><button type="button" class="submenu-btn" onclick="showView('search-pt')">Pencarian Perguruan Tinggi</button></li>
+        </ul>
+      </li>
+      <li>
+        <button type="button" class="menu-btn" onclick="showView('verify')">
+          <span class="menu-btn-left">
+            <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.2 13.4l-3.4-3.4 1.4-1.4 2 2 4.6-4.6 1.4 1.4-6 6z"/>
+            </svg>
+            <span>Verifikasi SK</span>
+          </span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="menu-btn" onclick="showView('register')">
+          <span class="menu-btn-left">
+            <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 5h18a2 2 0 012 2v10a2 2 0 01-2 2H3a2 2 0 01-2-2V7a2 2 0 012-2zm6 4a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm-4 7.5c0-1.7 2.7-2.5 4-2.5s4 .8 4 2.5V17H5v-.5zm9-7.5h6v1.8h-6V9zm0 3.2h6V14h-6v-1.8z"/>
+            </svg>
+            <span>Registrasi</span>
+          </span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="menu-btn" onclick="showView('login')">
+          <span class="menu-btn-left">
+            <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M10 11a4 4 0 100-8 4 4 0 000 8zm0 2c-3.3 0-6 1.8-6 4v2h12v-2c0-2.2-2.7-4-6-4zm8.5-4.5l-1.4 1.4 1.1 1.1H14v2h4.2l-1.1 1.1 1.4 1.4 3.5-3.5-3.5-3.5z"/>
+            </svg>
+            <span id="loginMenuText">Login</span>
+          </span>
+        </button>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- KONTEN HALAMAN -->
+  <main class="page-wrapper">
+    <!-- 1. DETAIL SK -->
+    <section id="view-detail" class="view-box active">
+      <h1 class="detail-title">DETAIL SK</h1>
+      <div id="detailStatusLabel" class="detail-status">Active</div>
+      <div id="skDetailCard" class="sk-card"></div>
+
+      <div id="adminQuickPanel" class="admin-quick-panel">
+        <div class="action-row">
+          <button type="button" class="btn btn-amber" onclick="editActiveSk()">Edit SK Ini</button>
+          <button type="button" class="btn btn-light" onclick="copyCurrentSkLink()">Salin Link SK</button>
+          <button type="button" class="btn btn-light" onclick="showView('login')">Kelola Semua SK</button>
+        </div>
+        <div id="quickLinkInfo" class="helper-text"></div>
+      </div>
+    </section>
+
+    <!-- 2. BERANDA -->
+    <section id="view-home" class="view-box">
+      <h2 class="section-heading">Beranda</h2>
+      <div class="card-box">
+        <p style="margin-bottom: 12px;">Layanan pengecekan data Surat Keputusan (SK) penyetaraan ijazah dan konversi nilai.</p>
+        <div class="action-row">
+          <button type="button" class="btn btn-blue" onclick="showView('search-sk')">Pencarian SK</button>
+          <button type="button" class="btn btn-light" onclick="showView('detail')">Lihat Detail SK</button>
+          <button type="button" class="btn btn-light" onclick="showView('login')">Login Admin</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PENGUMUMAN -->
+    <section id="view-announcement" class="view-box">
+      <h2 class="section-heading">Pengumuman</h2>
+      <div class="card-box">
+        <p style="font-weight: 600; margin-bottom: 6px;">Informasi Penetapan &amp; Verifikasi SK</p>
+        <p class="helper-text" style="margin-top: 0;">Gunakan Nomor SK penyetaraan atau konversi nilai untuk membuka halaman detail SK secara langsung.</p>
+      </div>
+    </section>
+
+    <!-- 4. SYARAT -->
+    <section id="view-requirements" class="view-box">
+      <h2 class="section-heading">Syarat</h2>
+      <div class="card-box">
+        <p style="font-weight: 600; margin-bottom: 6px;">Persyaratan Dokumen</p>
+        <p class="helper-text" style="margin-top: 0;">Siapkan dokumen ijazah, transkrip nilai, identitas diri, serta berkas pendukung sesuai ketentuan berlaku.</p>
+      </div>
+    </section>
+
+    <!-- 5. FAQ -->
+    <section id="view-faq" class="view-box">
+      <h2 class="section-heading">FAQ</h2>
+      <div class="card-box">
+        <p style="font-weight: 600; margin-bottom: 4px;">Bagaimana cara mengubah isi data SK?</p>
+        <p class="helper-text" style="margin-top: 0; margin-bottom: 12px;">Buka menu Login, buat/masukkan PIN Admin, lalu pilih Edit pada daftar SK.</p>
+        <p style="font-weight: 600; margin-bottom: 4px;">Bagaimana cara mengatur link khusus SK?</p>
+        <p class="helper-text" style="margin-top: 0;">Atur format link di bagian <code>CUSTOM_LINK_CONFIG</code> pada kode atau gunakan kolom Slug Link Khusus SK saat mengedit/menambah data.</p>
+      </div>
+    </section>
+
+    <!-- 6. PENCARIAN SK & VERIFIKASI SK -->
+    <section id="view-search-sk" class="view-box">
+      <h2 id="searchHeading" class="section-heading">Pencarian SK</h2>
+      <div class="card-box">
+        <form onsubmit="submitSearchSk(event)">
+          <div class="field-group">
+            <label for="searchInput" class="field-label">No SK</label>
+            <input id="searchInput" type="text" class="field-input" placeholder="Masukkan No SK atau Nama" />
+          </div>
+          <div class="action-row">
+            <button type="submit" class="btn btn-blue">Cari</button>
+            <button type="button" class="btn btn-light" onclick="runSampleSearch()">Contoh: 1307/Dikti/Kep/IJLN/2026</button>
+          </div>
+        </form>
+        <div id="searchResults" style="margin-top: 14px;"></div>
+      </div>
+    </section>
+
+    <!-- 7. PENCARIAN PERGURUAN TINGGI -->
+    <section id="view-search-pt" class="view-box">
+      <h2 class="section-heading">Pencarian Perguruan Tinggi</h2>
+      <div class="card-box">
+        <div class="field-group">
+          <label for="ptSearchInput" class="field-label">Negara / Bidang Studi</label>
+          <input id="ptSearchInput" type="text" class="field-input" placeholder="Ketik negara atau bidang studi..." oninput="renderPtList()" />
+        </div>
+        <div id="ptResults"></div>
+      </div>
+    </section>
+
+    <!-- 8. REGISTRASI -->
+    <section id="view-register" class="view-box">
+      <h2 class="section-heading">Registrasi</h2>
+      <div class="card-box">
+        <div id="registerMessage"></div>
+        <form onsubmit="submitRegister(event)">
+          <div class="field-group">
+            <label class="field-label">Nama Lengkap</label>
+            <input type="text" class="field-input" required placeholder="email@contoh.com" />
+          </div>
+          <button type="submit" class="btn btn-blue">Daftar</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- 9. LOGIN ADMIN & PANEL KELOLA DATA -->
+    <section id="view-login" class="view-box">
+      <h2 class="section-heading">Login Admin</h2>
+
+      <div id="loginBox" class="card-box">
+        <div class="notice notice-info">
+          Mode edit khusus untuk Anda. Jika belum ada PIN tersimpan di browser ini, ketik PIN baru (minimal 4 karakter) lalu klik <strong>Masuk Mode Admin</strong>.
+        </div>
+        <div id="loginMessage"></div>
+        <form onsubmit="submitAdminLogin(event)">
+          <div class="field-group">
+            <label for="adminPinInput" class="field-label">PIN Admin</label>
+            <input id="adminPinInput" type="password" class="field-input" required placeholder="Masukkan atau buat PIN admin" />
+          </div>
+          <div class="action-row">
+            <button type="submit" class="btn btn-blue">Masuk Mode Admin</button>
+            <button type="button" class="btn btn-light" onclick="resetAdminPin()">Reset PIN</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="adminPanel" style="display: none;">
+        <div class="card-box">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px;">
+            <div>
+              <h3 style="font-size: 16px; font-weight: 700;">Daftar Data SK</h3>
+              <div class="helper-text" style="margin-top: 2px;">Ubah data, tambah SK baru, atau salin link khusus SK.</div>
+            </div>
+            <div class="action-row">
+              <button type="button" class="btn btn-amber" onclick="startNewSk()">+ Tambah SK</button>
+              <button type="button" class="btn btn-light" onclick="logoutAdmin()">Logout</button>
+            </div>
+          </div>
+          <div id="adminMessage"></div>
+          <div id="adminSkList"></div>
+        </div>
+
+        <div id="skFormCard" class="card-box" style="display: none;">
+          <h3 id="skFormTitle" style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">Edit Data SK</h3>
+          <form onsubmit="saveSkForm(event)">
+            <input type="hidden" id="originalSkKey" />
+            <div class="form-grid">
+              <div class="field-group">
+                <label class="field-label">Nama</label>
+                <input id="inp_nama" type="text" class="field-input" required />
+              </div>
+              <div class="field-group">
+                <label class="field-label">Tempat, Tanggal Lahir</label>
+                <input id="inp_ttl" type="text" class="field-input" required />
+              </div>
+              <div class="field-group">
+                <label class="field-label">Negara/Wilayah</label>
+                <input id="inp_negara" type="text" class="field-input" required />
+              </div>
+              <div class="field-group">
+                <label class="field-label">Bidang Studi</label>
+                <input id="inp_bidang" type="text" class="field-input" required />
+              </div>
+              <div class="field-group">
+                <label class="field-label">Gelar</label>
+                <input id="inp_gelar" type="text" class="field-input" required />
+              </div>
+              <div class="field-group">
+                <label class="field-label">Nomor SK Penyetaraan</label>
+                <input id="inp_noSk" type="text" class="field-input" required />
+              </div>
+              <div class="field-group">
+                <label class="field-label">Nomor SK Konversi Nilai</label>
+                <input id="inp_noKonversi" type="text" class="field-input" required />
+              </div>
+              <div class="field-group">
+                <label class="field-label">Hasil Kesetaraan</label>
+                <input id="inp_hasilSetara" type="text" class="field-input" required />
+              </div>
+              <div class="field-group">
+                <label class="field-label">Hasil Konversi Nilai</label>
+                <input id="inp_hasilKonversi" type="text" class="field-input" required />
+              </div>
+              <div class="field-group">
+                <label class="field-label">Status</label>
+                <input id="inp_status" type="text" class="field-input" required />
+              </div>
+              <div class="field-group">
+                <label class="field-label">Status Tampilan</label>
+                <select id="inp_activeState" class="field-input">
+                  <option value="Active">Active</option>
+                  <option value="Non-Active">Non-Active</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Kode / Slug Link Khusus SK (Opsional)</label>
+                <input id="inp_customSlug" type="text" class="field-input" placeholder="Contoh: 1307-muhammad-dani" />
+              </div>
+            </div>
+            <div class="action-row" style="margin-top: 6px;">
+              <button type="submit" class="btn btn-blue">Simpan Perubahan</button>
+              <button type="button" class="btn btn-light" onclick="closeSkForm()">Batal</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const CUSTOM_LINK_CONFIG = {
+      PARAM_NAME: "no",
+      CUSTOM_BASE_URL: ""
+    };
+
+    const KEY_SK_DATA = "kemdtek_sk_data_v2";
+    const KEY_ADMIN_PIN = "kemdtek_admin_pin_v2";
+    const KEY_ADMIN_AUTH = "kemdtek_admin_auth_v2";
+
+    const INITIAL_DATA = [
+      {
+        nama: "Muhammad Dani Saut Maruli",
+        ttl: "Bandar Lampung, 14 Mei 1999",
+        negara: "Lebanon",
+        bidang: "Political Science",
+        gelar: "Bachelor",
+        noSk: "1307/Dikti/Kep/IJLN/2026",
+        noKonversi: "1307/Dikti/Kep/IJLN/2026",
+        hasilSetara: "Sarjana",
+        hasilKonversi: "3.13",
+        status: "Usulan Selesai Diproses",
+        activeState: "Active",
+        customSlug: ""
+      }
+    ];
+
+    let records = loadRecords();
+    let activeNoSk = records[0].noSk;
+    let isAdmin = sessionStorage.getItem(KEY_ADMIN_AUTH) === "1";
+
+    function loadRecords() {
+      try {
+        const raw = localStorage.getItem(KEY_SK_DATA);
+        if (!raw) {
+          localStorage.setItem(KEY_SK_DATA, JSON.stringify(INITIAL_DATA));
+          return INITIAL_DATA.map((x) => ({ ...x }));
+        }
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      } catch (err) {}
+      return INITIAL_DATA.map((x) => ({ ...x }));
+    }
+
+    function saveRecords() {
+      localStorage.setItem(KEY_SK_DATA, JSON.stringify(records));
+    }
+
+    function esc(text) {
+      return String(text == null ? "" : text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function findRecord(queryValue) {
+      if (!queryValue) return null;
+      const needle = decodeURIComponent(String(queryValue)).trim().toLowerCase();
+      return (
+        records.find(
+          (item) =>
+            item.noSk.trim().toLowerCase() === needle ||
+            (item.customSlug && item.customSlug.trim().toLowerCase() === needle)
+        ) || null
+      );
+    }
+
+    function getCustomSkUrl(record) {
+      const token = (record.customSlug && record.customSlug.trim())
+        ? record.customSlug.trim()
+        : record.noSk.trim();
+      const baseUrl = (CUSTOM_LINK_CONFIG.CUSTOM_BASE_URL && CUSTOM_LINK_CONFIG.CUSTOM_BASE_URL.trim())
+        ? CUSTOM_LINK_CONFIG.CUSTOM_BASE_URL.trim().replace(/\?.*$/, "")
+        : `${window.location.origin}${window.location.pathname}`;
+      const param = encodeURIComponent(CUSTOM_LINK_CONFIG.PARAM_NAME || "no");
+      return `${baseUrl}?${param}=${encodeURIComponent(token)}`;
+    }
+
+    function renderDetail(noSkValue, syncBrowserUrl) {
+      const item = findRecord(noSkValue) || records[0];
+      activeNoSk = item.noSk;
+
+      if (syncBrowserUrl && !CUSTOM_LINK_CONFIG.CUSTOM_BASE_URL) {
+        const nextUrl = getCustomSkUrl(item);
+        window.history.replaceState({ no: item.noSk }, "", nextUrl);
+      }
+
+      const statusEl = document.getElementById("detailStatusLabel");
+      const stateText = item.activeState || "Active";
+      statusEl.textContent = stateText;
+      statusEl.className = stateText.toLowerCase() === "active"
+        ? "detail-status"
+        : "detail-status inactive";
+
+      const fields = [
+        ["Nama", item.nama],
+        ["Tempat, Tanggal Lahir", item.ttl],
+        ["Negara/Wilayah", item.negara],
+        ["Bidang Studi", item.bidang],
+        ["Gelar", item.gelar],
+        ["Nomor SK Penyetaraan", item.noSk],
+        ["Nomor SK Konversi Nilai", item.noKonversi],
+        ["Hasil Kesetaraan", item.hasilSetara],
+        ["Hasil Konversi Nilai", item.hasilKonversi],
+        ["Status", item.status]
+      ];
+
+      const card = document.getElementById("skDetailCard");
+      card.innerHTML = fields
+        .map(
+          ([label, val]) => `
+            <div class="sk-row">
+              <div class="sk-label">${esc(label)}</div>
+              <div class="sk-val">${esc(val)}</div>
+            </div>
+          `
+        )
+        .join("");
+
+      updateAdminUi();
+    }
+
+    function updateAdminUi() {
+      const badge = document.getElementById("adminBadge");
+      const quickPanel = document.getElementById("adminQuickPanel");
+      const loginMenuText = document.getElementById("loginMenuText");
+      const loginBox = document.getElementById("loginBox");
+      const adminPanel = document.getElementById("adminPanel");
+
+      if (isAdmin) {
+        badge.style.display = "inline-block";
+        quickPanel.style.display = "block";
+        loginMenuText.textContent = "Kelola SK";
+        loginBox.style.display = "none";
+        adminPanel.style.display = "block";
+        renderAdminList();
+      } else {
+        badge.style.display = "none";
+        quickPanel.style.display = "none";
+        loginMenuText.textContent = "Login";
+        loginBox.style.display = "block";
+        adminPanel.style.display = "none";
+      }
+    }
+
+    function setDrawer(open) {
+      document.getElementById("drawerOverlay").classList.toggle("open", Boolean(open));
+      document.getElementById("drawerPanel").classList.toggle("open", Boolean(open));
+    }
+
+    function toggleSearchSubmenu() {
+      const sub = document.getElementById("searchSubmenu");
+      const arrow = document.getElementById("submenuArrow");
+      const opened = sub.classList.toggle("open");
+      arrow.innerHTML = opened ? "&#9652;" : "&#9660;";
+    }
+
+    function showView(viewId) {
+      document.querySelectorAll(".view-box").forEach((el) => el.classList.remove("active"));
+
+      if (viewId === "verify") {
+        document.getElementById("view-search-sk").classList.add("active");
+        document.getElementById("searchHeading").textContent = "Verifikasi SK";
+      } else if (viewId === "search-sk") {
+        document.getElementById("view-search-sk").classList.add("active");
+        document.getElementById("searchHeading").textContent = "Pencarian SK";
+      } else {
+        const target = document.getElementById("view-" + viewId) || document.getElementById("view-detail");
+        target.classList.add("active");
+      }
+
+      if (viewId === "search-pt") {
+        renderPtList();
+      }
+      if (viewId === "login") {
+        updateAdminUi();
+      }
+
+      setDrawer(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function runSampleSearch() {
+      document.getElementById("searchInput").value = "1307/Dikti/Kep/IJLN/2026";
+      doSearch("1307/Dikti/Kep/IJLN/2026");
+    }
+
+    function submitSearchSk(event) {
+      event.preventDefault();
+      doSearch(document.getElementById("searchInput").value.trim());
+    }
+
+    function doSearch(keyword) {
+      const box = document.getElementById("searchResults");
+      if (!keyword) {
+        box.innerHTML = `<div class="notice notice-info">Masukkan Nomor SK atau Nama terlebih dahulu.</div>`;
+        return;
+      }
+
+      const q = keyword.toLowerCase();
+      const found = records.filter(
+        (r) =>
+          r.noSk.toLowerCase().includes(q) ||
+          r.noKonversi.toLowerCase().includes(q) ||
+          r.nama.toLowerCase().includes(q)
+      );
+
+      if (found.length === 0) {
+        box.innerHTML = `<div class="notice notice-err">Data SK untuk "${esc(keyword)}" tidak ditemukan.</div>`;
+        return;
+      }
+
+      box.innerHTML = found
+        .map(
+          (r) => `
+            <div class="data-item">
+              <div>
+                <div class="data-item-title">${esc(r.nama)}</div>
+                <div class="data-item-sub">No SK: ${esc(r.noSk)} &bull; ${esc(r.bidang)}</div>
+              </div>
+              <button type="button" class="btn btn-blue" onclick="openSk('${encodeURIComponent(r.noSk)}')">Buka Detail</button>
+            </div>
+          `
+        )
+        .join("");
+    }
+
+    function openSk(encodedNo) {
+      renderDetail(decodeURIComponent(encodedNo), true);
+      showView("detail");
+    }
+
+    function renderPtList() {
+      const q = (document.getElementById("ptSearchInput")?.value || "").trim().toLowerCase();
+      const box = document.getElementById("ptResults");
+      const list = records.filter(
+        (r) => !q || r.negara.toLowerCase().includes(q) || r.bidang.toLowerCase().includes(q)
+      );
+
+      if (list.length === 0) {
+        box.innerHTML = `<p class="helper-text">Tidak ada data yang cocok.</p>`;
+        return;
+      }
+
+      box.innerHTML = list
+        .map(
+          (r) => `
+            <div class="data-item">
+              <div>
+                <div class="data-item-title">${esc(r.negara)} &mdash; ${esc(r.bidang)}</div>
+                <div class="data-item-sub">Kesetaraan: ${esc(r.hasilSetara)} (${esc(r.gelar)})</div>
+              </div>
+              <button type="button" class="btn btn-light" onclick="openSk('${encodeURIComponent(r.noSk)}')">Lihat SK</button>
+            </div>
+          `
+        )
+        .join("");
+    }
+
+    function submitRegister(event) {
+      event.preventDefault();
+      document.getElementById("registerMessage").innerHTML =
+        `<div class="notice notice-ok">Formulir registrasi berhasil dikirim.</div>`;
+      event.target.reset();
+    }
+
+    function submitAdminLogin(event) {
+      event.preventDefault();
+      const pin = document.getElementById("adminPinInput").value;
+      const savedPin = localStorage.getItem(KEY_ADMIN_PIN);
+      const msg = document.getElementById("loginMessage");
+
+      if (!pin || pin.length < 4) {
+        msg.innerHTML = `<div class="notice notice-err">PIN minimal 4 karakter.</div>`;
+        return;
+      }
+
+      if (!savedPin) {
+        localStorage.setItem(KEY_ADMIN_PIN, pin);
+        isAdmin = true;
+        sessionStorage.setItem(KEY_ADMIN_AUTH, "1");
+        msg.innerHTML = "";
+        updateAdminUi();
+        return;
+      }
+
+      if (pin === savedPin) {
+        isAdmin = true;
+        sessionStorage.setItem(KEY_ADMIN_AUTH, "1");
+        msg.innerHTML = "";
+        updateAdminUi();
+      } else {
+        msg.innerHTML = `<div class="notice notice-err">PIN Admin salah.</div>`;
+      }
+    }
+
+    function resetAdminPin() {
+      localStorage.removeItem(KEY_ADMIN_PIN);
+      isAdmin = false;
+      sessionStorage.removeItem(KEY_ADMIN_AUTH);
+      document.getElementById("loginMessage").innerHTML =
+        `<div class="notice notice-info">PIN dihapus. Silakan buat PIN baru.</div>`;
+      updateAdminUi();
+    }
+
+    function logoutAdmin() {
+      isAdmin = false;
+      sessionStorage.removeItem(KEY_ADMIN_AUTH);
+      document.getElementById("skFormCard").style.display = "none";
+      updateAdminUi();
+    }
+
+    function renderAdminList() {
+      const container = document.getElementById("adminSkList");
+      container.innerHTML = records
+        .map((r, idx) => {
+          const linkUrl = getCustomSkUrl(r);
+          return `
+            <div class="data-item">
+              <div style="flex: 1; min-width: 220px;">
+                <div class="data-item-title">${esc(r.nama)}</div>
+                <div class="data-item-sub">No SK: ${esc(r.noSk)} &bull; ${esc(r.activeState || "Active")}</div>
+                <div class="helper-text">Link: ${esc(linkUrl)}</div>
+              </div>
+              <div class="action-row">
+                <button type="button" class="btn btn-light" onclick="openSk('${encodeURIComponent(r.noSk)}')">Buka</button>
+                <button type="button" class="btn btn-amber" onclick="editSkAt(${idx})">Edit</button>
+                <button type="button" class="btn btn-light" onclick="copyRecordLink(${idx})">Salin Link</button>
+                ${
+                  records.length > 1
+                    ? `<button type="button" class="btn btn-red" onclick="deleteSkAt(${idx})">Hapus</button>`
+                    : ""
+                }
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    function startNewSk() {
+      document.getElementById("skFormCard").style.display = "block";
+      document.getElementById("skFormTitle").textContent = "Tambah Data SK Baru";
+      document.getElementById("originalSkKey").value = "";
+      document.getElementById("inp_nama").value = "";
+      document.getElementById("inp_ttl").value = "";
+      document.getElementById("inp_negara").value = "";
+      document.getElementById("inp_bidang").value = "";
+      document.getElementById("inp_gelar").value = "";
+      document.getElementById("inp_noSk").value = "";
+      document.getElementById("inp_noKonversi").value = "";
+      document.getElementById("inp_hasilSetara").value = "";
+      document.getElementById("inp_hasilKonversi").value = "";
+      document.getElementById("inp_status").value = "Usulan Selesai Diproses";
+      document.getElementById("inp_activeState").value = "Active";
+      document.getElementById("inp_customSlug").value = "";
+      document.getElementById("skFormCard").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function editSkAt(index) {
+      const r = records[index];
+      if (!r) return;
+      document.getElementById("skFormCard").style.display = "block";
+      document.getElementById("skFormTitle").textContent = "Edit Data SK: " + r.noSk;
+      document.getElementById("originalSkKey").value = r.noSk;
+      document.getElementById("inp_nama").value = r.nama;
+      document.getElementById("inp_ttl").value = r.ttl;
+      document.getElementById("inp_negara").value = r.negara;
+      document.getElementById("inp_bidang").value = r.bidang;
+      document.getElementById("inp_gelar").value = r.gelar;
+      document.getElementById("inp_noSk").value = r.noSk;
+      document.getElementById("inp_noKonversi").value = r.noKonversi;
+      document.getElementById("inp_hasilSetara").value = r.hasilSetara;
+      document.getElementById("inp_hasilKonversi").value = r.hasilKonversi;
+      document.getElementById("inp_status").value = r.status;
+      document.getElementById("inp_activeState").value = r.activeState || "Active";
+      document.getElementById("inp_customSlug").value = r.customSlug || "";
+      document.getElementById("skFormCard").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function editActiveSk() {
+      if (!isAdmin) return;
+      const idx = records.findIndex((r) => r.noSk === activeNoSk);
+      showView("login");
+      setTimeout(() => editSkAt(idx >= 0 ? idx : 0), 60);
+    }
+
+    function closeSkForm() {
+      document.getElementById("skFormCard").style.display = "none";
+    }
+
+    function saveSkForm(event) {
+      event.preventDefault();
+      if (!isAdmin) return;
+
+      const origKey = document.getElementById("originalSkKey").value.trim();
+      const updated = {
+        nama: document.getElementById("inp_nama").value.trim(),
+        ttl: document.getElementById("inp_ttl").value.trim(),
+        negara: document.getElementById("inp_negara").value.trim(),
+        bidang: document.getElementById("inp_bidang").value.trim(),
+        gelar: document.getElementById("inp_gelar").value.trim(),
+        noSk: document.getElementById("inp_noSk").value.trim(),
+        noKonversi: document.getElementById("inp_noKonversi").value.trim(),
+        hasilSetara: document.getElementById("inp_hasilSetara").value.trim(),
+        hasilKonversi: document.getElementById("inp_hasilKonversi").value.trim(),
+        status: document.getElementById("inp_status").value.trim(),
+        activeState: document.getElementById("inp_activeState").value,
+        customSlug: document.getElementById("inp_customSlug").value.trim()
+      };
+
+      if (origKey) {
+        const idx = records.findIndex((r) => r.noSk === origKey);
+        if (idx >= 0) {
+          records[idx] = updated;
+        } else {
+          records.push(updated);
+        }
+      } else {
+        const dupIdx = records.findIndex((r) => r.noSk.toLowerCase() === updated.noSk.toLowerCase());
+        if (dupIdx >= 0) {
+          records[dupIdx] = updated;
+        } else {
+          records.unshift(updated);
+        }
+      }
+
+      saveRecords();
+      renderAdminList();
+      renderDetail(updated.noSk, true);
+      document.getElementById("skFormCard").style.display = "none";
+      document.getElementById("adminMessage").innerHTML =
+        `<div class="notice notice-ok">Data SK (${esc(updated.noSk)}) berhasil disimpan.</div>`;
+    }
+
+    function deleteSkAt(index) {
+      if (!isAdmin || records.length <= 1) return;
+      const removed = records[index];
+      records.splice(index, 1);
+      saveRecords();
+      if (activeNoSk === removed.noSk) {
+        renderDetail(records[0].noSk, true);
+      }
+      renderAdminList();
+      document.getElementById("adminMessage").innerHTML =
+        `<div class="notice notice-info">SK ${esc(removed.noSk)} dihapus.</div>`;
+    }
+
+    function copyText(text, targetId) {
+      const target = document.getElementById(targetId);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          if (target) target.textContent = "Link tersalin: " + text;
+        }).catch(() => {
+          if (target) target.textContent = text;
+        });
+      } else if (target) {
+        target.textContent = text;
+      }
+    }
+
+    function copyCurrentSkLink() {
+      const item = findRecord(activeNoSk) || records[0];
+      copyText(getCustomSkUrl(item), "quickLinkInfo");
+    }
+
+    function copyRecordLink(index) {
+      const item = records[index];
+      if (!item) return;
+      const url = getCustomSkUrl(item);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).catch(() => {});
+      }
+      document.getElementById("adminMessage").innerHTML =
+        `<div class="notice notice-info">Link SK: ${esc(url)}</div>`;
+    }
+
+    (function boot() {
+      const params = new URLSearchParams(window.location.search);
+      const paramName = CUSTOM_LINK_CONFIG.PARAM_NAME || "no";
+      const requested = params.get(paramName) || params.get("no");
+      renderDetail(requested || activeNoSk, false);
+    })();
+  </script>
+</body>
+</html>
