@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PILN - KEMDIKTISAINTEK | Penyetaraan Ijazah Luar Negeri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1a3a8a;
+      --primary-light: #3b66d4;
+      --accent: #f59e0b;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --footer-bg: #111827;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* HEADER & NAVBAR */
+    header {
+      background: #ffffff;
+      border-bottom: 3px solid var(--accent);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: #0f172a;
+      text-decoration: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hamburger-btn {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      width: 44px;
+      height: 38px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .hamburger-btn:hover {
+      background: #f1f5f9;
+    }
+
+    .hamburger-btn span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: #475569;
+      border-radius: 2px;
+    }
+
+    /* DRAWER MENU */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.45);
+      z-index: 199;
+      display: none;
+    }
+
+    .drawer-overlay.open {
+      display: block;
+    }
+
+    .nav-drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-width: 360px;
+      height: 100vh;
+      background: #ffffff;
+      z-index: 200;
+      transform: translateX(-100%);
+      transition: transform 0.28s ease;
+      overflow-y: auto;
+      box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+      border-bottom: 3px solid var(--accent);
+    }
+
+    .nav-drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drawer-title {
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: #0f172a;
+    }
+
+    .close-drawer {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #64748b;
+      cursor: pointer;
+    }
+
+    .menu-list {
+      list-style: none;
+      padding: 12px 16px;
+    }
+
+    .menu-item {
+      margin-bottom: 6px;
+    }
+
+    .menu-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      color: #475569;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.98rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    .menu-link:hover, .menu-link.active {
+      background: #eff6ff;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .menu-link svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .submenu-box {
+      display: none;
+      margin: 4px 0 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    .submenu-box.open {
+      display: block;
+    }
+
+    .submenu-link {
+      display: block;
+      padding: 12px 16px;
+      font-size: 0.92rem;
+      color: #334155;
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .submenu-link:last-child {
+      border-bottom: none;
+    }
+
+    .submenu-link:hover {
+      background: #f8fafc;
+      color: var(--primary-light);
+    }
+
+    /* MAIN CONTAINER */
+    main {
+      flex: 1;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    .page-section {
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* BANNER BERANDA */
+    .flow-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .flow-badge {
+      background: #1d4ed8;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      font-size: 0.78rem;
+    }
+
+    .flow-step {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .flow-step strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .hero-banner {
+      background: linear-gradient(135deg, #0c357a 0%, #164ea6 100%);
+      border: 3px solid var(--accent);
+      border-radius: 16px;
+      padding: 28px 20px;
+      text-align: center;
+      color: #ffffff;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 20px rgba(12, 53, 122, 0.18);
+    }
+
+    .hero-banner h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .hero-banner .gratis-text {
+      color: #facc15;
+      font-size: 1.55rem;
+      font-weight: 800;
+    }
+
+    .hero-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      color: #334155;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary-light);
+      color: var(--primary-light);
+    }
+
+    .btn-primary {
+      background: #4873d6;
+      border: none;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover {
+      background: #365ec0;
+    }
+
+    .btn-pill {
+      border-radius: 999px;
+      width: 100%;
+      padding: 14px;
+      font-size: 1rem;
+    }
+
+    /* SECTION HEADINGS & CARDS */
+    .section-title {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 6px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    }
+
+    .news-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+
+    .news-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #1e293b;
+    }
+
+    .news-date {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    .news-excerpt {
+      font-size: 0.9rem;
+      color: #475569;
+      margin-bottom: 14px;
+    }
+
+    /* ACCORDION FAQ */
+    .faq-item {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: #ffffff;
+      border: none;
+      padding: 16px;
+      text-align: left;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1e293b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 16px 16px;
+      font-size: 0.9rem;
+      color: #475569;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+      padding-top: 12px;
+    }
+
+    /* FORM INPUTS (LOGIN, REGISTRASI, PENCARIAN) */
+    .auth-card {
+      max-width: 440px;
+      margin: 16px auto;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 32px 24px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--border);
+    }
+
+    .auth-card h2 {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: #1e293b;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #334155;
+    }
+
+    .form-label span {
+      color: var(--danger);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    .form-control-rect {
+      border-radius: 10px;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary-light);
+    }
+
+    .recaptcha-box {
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      border-radius: 6px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .recaptcha-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: #374151;
+    }
+
+    .recaptcha-left input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+    }
+
+    .auth-footer-link {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 0.9rem;
+      color: #475569;
+    }
+
+    .auth-footer-link a {
+      color: #3b66d4;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* CEK DOKUMEN / VERIFIKASI SK */
+    .verify-box {
+      background: linear-gradient(180deg, #fefce8 0%, #ffffff 100%);
+      border: 1px solid #fde68a;
+      border-radius: 16px;
+      padding: 36px 20px;
+      text-align: center;
+    }
+
+    .verify-logo {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 6px;
+    }
+
+    .verify-logo span {
+      color: #84cc16;
+      font-style: italic;
+    }
+
+    .btn-yellow-pill {
+      background: #facc15;
+      color: #1e293b;
+      font-weight: 700;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(250, 204, 21, 0.35);
+      margin: 18px 0;
+    }
+
+    /* DETAIL SK (HALAMAN TUJUAN LINK CUSTOM / QR SCAN) */
+    .detail-sk-header {
+      margin-bottom: 16px;
+    }
+
+    .detail-sk-header h2 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #334155;
+      letter-spacing: 0.4px;
+    }
+
+    .status-active {
+      color: #22c55e;
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-top: 4px;
+      display: inline-block;
+    }
+
+    .detail-sk-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    .detail-row {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 3px;
+    }
+
+    .detail-value {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    /* HASIL PENCARIAN SK + FOTO SK */
+    .sk-search-result {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 16px;
+    }
+
+    .sk-photo-preview {
+      width: 140px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      display: block;
+      margin: 0 auto 16px;
+      background: #f1f5f9;
+    }
+
+    .sk-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+
+    .sk-table td {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+    }
+
+    .sk-table td:first-child {
+      font-weight: 600;
+      color: #475569;
+      width: 40%;
+      background: #f8fafc;
+    }
+
+    /* PANEL ADMIN (TERSEMBUNYI - HANYA LEWAT JALUR KHUSUS LINK UTAMA) */
+    .admin-banner {
+      background: #1e293b;
+      color: #f8fafc;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .admin-badge {
+      background: var(--accent);
+      color: #0f172a;
+      font-weight: 800;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    /* FOOTER KHAS KEMDIKTISAINTEK */
+    footer {
+      background: var(--footer-bg);
+      color: #e2e8f0;
+      border-top: 4px solid var(--accent);
+      padding: 32px 20px 24px;
+      margin-top: auto;
+    }
+
+    .footer-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .footer-org {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .footer-address {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      margin-bottom: 14px;
+    }
+
+    .footer-socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+
+    .footer-socials span {
+      color: #93c5fd;
+    }
+
+    .footer-badges {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .badge-card {
+      background: #ffffff;
+      color: #0f172a;
+      border-radius: 8px;
+      padding: 14px;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .badge-lapor {
+      color: #dc2626;
+      font-size: 1.35rem;
+      letter-spacing: 1px;
+    }
+
+    .badge-bsre {
+      color: #0284c7;
+      font-size: 1.05rem;
+    }
+
+    .footer-copyright {
+      border-top: 1px solid #334155;
+      padding-top: 16px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: #94a3b8;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="nav-container">
+      <div class="brand" id="brandTrigger" onclick="navigateTo('beranda')">
+        KEMDIKTISAINTEK
+      </div>
+      <button class="hamburger-btn" onclick="toggleDrawer(true)" aria-label="Buka Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- OVERLAY & DRAWER MENU -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer(false)"></div>
+  <nav class="nav-drawer" id="navDrawer">
+    <div class="drawer-header">
+      <span class="drawer-title">KEMDIKTISAINTEK</span>
+      <button class="close-drawer" onclick="toggleDrawer(false)">&times;</button>
+    </div>
+    <ul class="menu-list">
+      <li class="menu-item">
+        <a class="menu-link" data-page="beranda" onclick="navigateTo('beranda')">
+          <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+          Beranda
+        </a>
+      </li>
+      <li class="menu-item">
+        <a class="menu-link" data-page="pengumuman" onclick="navigateTo('pengumuman')">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+          Pengumuman
+        </a>
+      </li>
+      <li class="menu-item">
+        <a class="menu-link" data-page="syarat" onclick="navigateTo('syarat')">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          Syarat
+        </a>
+      </li>
+      <li class="menu-item">
+        <a class="menu-link" data-page="faq" onclick="navigateTo('faq')">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+          FAQ
+        </a>
+      </li>
+      <li class="menu-item">
+        <a class="menu-link" onclick="toggleSubmenu()">
+          <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          Pencarian Data &#9662;
+        </a>
+        <div class="submenu-box" id="pencarianSubmenu">
+          <a class="submenu-link" onclick="navigateTo('pencarian-sk')">Pencarian SK</a>
+          <a class="submenu-link" onclick="navigateTo('pencarian-sk-lama')">Pencarian SK Lama</a>
+          <a class="submenu-link" onclick="navigateTo('cek-status')">Cek Status Usulan</a>
+          <a class="submenu-link" onclick="navigateTo('pencarian-pt')">Pencarian Perguruan Tinggi</a>
+        </div>
+      </li>
+      <li class="menu-item">
+        <a class="menu-link" data-page="verifikasi-sk" onclick="navigateTo('verifikasi-sk')">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          Verifikasi SK
+        </a>
+      </li>
+      <li class="menu-item">
+        <a class="menu-link" data-page="registrasi" onclick="navigateTo('registrasi')">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM9 8c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm4 8H5v-.5c0-1.33 2.67-2 4-2s4 .67 4 2v.5zm6-1h-5v-1.5h5V15zm0-3h-5v-1.5h5V12z"/></svg>
+          Registrasi
+        </a>
+      </li>
+      <li class="menu-item">
+        <!-- Menu Login selalu menuju Login Pendaftar -->
+        <a class="menu-link" data-page="login" onclick="navigateTo('login')">
+          <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          Login
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- 1. BERANDA -->
+    <section id="page-beranda" class="page-section active">
+      <div class="flow-card">
+        <span class="flow-badge">Alur Penyetaraan Ijazah Luar Negeri</span>
+        <div class="flow-steps">
+          <div class="flow-step"><strong>1. Registrasi</strong>Pengusul membuat akun pengguna</div>
+          <div class="flow-step"><strong>2. Pengajuan</strong>Isi borang & unggah berkas</div>
+          <div class="flow-step"><strong>3. Verifikasi</strong>Pemeriksaan dokumen & PT</div>
+          <div class="flow-step"><strong>4. Penerbitan SK</strong>Unduh SK digital bertanda tangan</div>
+        </div>
+      </div>
+
+      <div class="hero-banner">
+        <h1>Layanan Penyetaraan Ijazah dan Konversi Nilai IPK Lulusan Perguruan Tinggi Luar Negeri</h1>
+        <div class="gratis-text">Tidak Dipungut Biaya (Gratis)</div>
+      </div>
+
+      <div class="hero-actions">
+        <button class="btn-outline" onclick="navigateTo('login')">Login</button>
+        <button class="btn-primary" onclick="navigateTo('registrasi')">Registrasi</button>
+      </div>
+
+      <!-- Cuplikan Pengumuman -->
+      <h2 class="section-title">PENGUMUMAN</h2>
+      <p class="section-subtitle">Berisi tentang pengumuman dan berita terbaru terkait layanan penyetaraan ijazah</p>
+      <div class="card">
+        <div class="news-header">
+          <div>
+            <div class="news-title">Layanan Kami Tidak Dipungut Biaya dan Tidak Menerima Gratifikasi!</div>
+            <div class="news-date" style="text-align:left; margin-top:4px;">16 Okt 2023, 01:39:16</div>
+          </div>
+        </div>
+        <p class="news-excerpt">Layanan Penyetaraan Ijazah dan Konversi IPK Lulusan Perguruan Tinggi Luar Negeri tidak dipungut biaya dan Tidak Menerima Gratifikasi.</p>
+        <div style="text-align:right;">
+          <a style="color:#1d4ed8; font-weight:600; font-size:0.9rem; cursor:pointer;" onclick="navigateTo('pengumuman')">Lihat Selengkapnya &rarr;</a>
+        </div>
+      </div>
+      <div style="text-align:center; margin-bottom: 36px;">
+        <button class="btn-outline" style="padding:10px 28px;" onclick="navigateTo('pengumuman')">Lihat Semua</button>
+      </div>
+
+      <!-- Syarat Penyetaraan Ijazah -->
+      <h2 class="section-title">SYARAT PENYETARAAN IJAZAH</h2>
+      <p class="section-subtitle">Bantu kami untuk memproses permintaan Anda lebih cepat dengan memahami Persyaratan dan Ketentuan yang berlaku sebelum mengajukan.</p>
+      <div style="margin-bottom: 36px;">
+        <button class="btn-primary" style="width:100%; padding:14px;" onclick="navigateTo('syarat')">Persyaratan dan Prosedur</button>
+      </div>
+
+      <!-- FAQ Ringkas -->
+      <h2 class="section-title">FAQ</h2>
+      <p class="section-subtitle">Mengalami kendala pada saat mengajukan penyetaraan? Coba cek dahulu di daftar ini untuk menemukan solusinya.</p>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Kenapa Berkas Saya Ditunda?</span><span>&#9662;</span>
+        </button>
+        <div class="faq-answer">Berkas ditunda apabila dokumen pindaian tidak terbaca jelas, paspor tidak lengkap seluruh halaman berstempel imigrasi, atau diperlukan konfirmasi akreditasi perguruan tinggi asal.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Bagaimana cara yang benar dalam memindai paspor?</span><span>&#9662;</span>
+        </button>
+        <div class="faq-answer">Pindai seluruh halaman paspor mulai dari halaman identitas hingga seluruh halaman yang memuat visa serta cap keluar/masuk imigrasi dalam satu file PDF berwarna dengan resolusi jelas.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Kenapa Ijazah Bachelor saya disetarakan dengan Diploma Tiga?</span><span>&#9662;</span>
+        </button>
+        <div class="faq-answer">Penyetaraan mengacu pada kerangka kualifikasi nasional (KKNI), lama masa studi normal, beban kredit akademik, dan sistem pendidikan tinggi di negara asal perguruan tinggi.</div>
+      </div>
+      <div style="text-align:center; margin-top: 16px;">
+        <button class="btn-outline" style="padding:10px 28px;" onclick="navigateTo('faq')">Lihat Semua</button>
+      </div>
+    </section>
+
+    <!-- 2. PENGUMUMAN -->
+    <section id="page-pengumuman" class="page-section">
+      <h2 class="section-title">PENGUMUMAN</h2>
+      <p class="section-subtitle">Berisi tentang pengumuman dan berita terbaru terkait layanan penyetaraan ijazah</p>
+
+      <div class="card">
+        <div class="news-header">
+          <div class="news-title">Permohonan Informasi dan Pengaduan</div>
+          <div class="news-date">01 Mar 2023,<br>02:26:08</div>
+        </div>
+        <p class="news-excerpt">Pengusul dapat menghubungi Call Center resmi 021126 atau kanal LAPOR! untuk permohonan informasi dan pengaduan layanan penyetaraan ijazah.</p>
+        <button class="btn-primary" onclick="alert('Detail Pengumuman: Layanan pengaduan resmi melalui Call Center 021126 dan SP4N-LAPOR!')">Lihat Selengkapnya &rarr;</button>
+      </div>
+
+      <div class="card">
+        <div class="news-header">
+          <div class="news-title">Penyetaraan Prodi Keagamaan</div>
+          <div class="news-date">01 Mar 2023,<br>02:30:45</div>
+        </div>
+        <p class="news-excerpt">Penyetaraan ijazah perguruan tinggi luar negeri untuk program studi rumpun ilmu agama dilaksanakan sesuai ketentuan koordinasi kementerian terkait.</p>
+        <button class="btn-primary" onclick="alert('Detail Pengumuman: Penyetaraan program studi keagamaan mengacu pada ketentuan regulasi yang berlaku.')">Lihat Selengkapnya &rarr;</button>
+      </div>
+
+      <div class="card">
+        <div class="news-header">
+          <div class="news-title">Layanan Kami Tidak Dipungut Biaya dan Tidak Menerima Gratifikasi!</div>
+          <div class="news-date">16 Okt 2023,<br>01:39:16</div>
+        </div>
+        <p class="news-excerpt">Layanan Penyetaraan Ijazah dan Konversi IPK Lulusan Perguruan Tinggi Luar Negeri sepenuhnya gratis tanpa pungutan apa pun.</p>
+        <button class="btn-primary" onclick="alert('Detail Pengumuman: Seluruh proses penyetaraan ijazah tidak dipungut biaya (Rp 0).')">Lihat Selengkapnya &rarr;</button>
+      </div>
+
+      <div class="card">
+        <div class="news-header">
+          <div class="news-title">Maklumat Pelayanan Direktorat Pembelajaran dan Kemahasiswaan</div>
+          <div class="news-date">06 Feb 2024,<br>02:58:37</div>
+        </div>
+        <p class="news-excerpt">Dengan ini kami berjanji akan memberikan pelayanan penyetaraan ijazah luar negeri sesuai standar pelayanan yang telah ditetapkan.</p>
+        <button class="btn-primary" onclick="alert('Detail Pengumuman: Maklumat pelayanan transparan, akuntabel, dan bebas gratifikasi.')">Lihat Selengkapnya &rarr;</button>
+      </div>
+    </section>
+
+    <!-- 3. SYARAT -->
+    <section id="page-syarat" class="page-section">
+      <h2 class="section-title">SYARAT PENYETARAAN IJAZAH</h2>
+      <p class="section-subtitle">Persyaratan dan ketentuan dokumen pengajuan penyetaraan ijazah luar negeri</p>
+      <div class="card">
+        <h3 style="margin-bottom:10px; color:var(--primary);">Dokumen Wajib Pengusul</h3>
+        <ul style="padding-left: 20px; color:#334155; display:grid; gap:8px;">
+          <li>Pindaian berwarna Ijazah asli yang telah dilegalisasi atau dapat diverifikasi keabsahannya.</li>
+          <li>Pindaian berwarna Transkrip Akademik lengkap seluruh semester.</li>
+          <li>Terjemahan resmi dalam Bahasa Indonesia atau Bahasa Inggris (jika dokumen asli menggunakan bahasa selain Inggris).</li>
+          <li>Pindaian Paspor lengkap seluruh halaman (identitas, visa pelajar, dan stempel imigrasi masuk/keluar selama masa studi).</li>
+          <li>Disertasi / Tesis / Tugas Akhir (ringkasan abstrak dan lembar pengesahan untuk jenjang Magister & Doktor).</li>
+          <li>KTP atau identitas kewarganegaraan yang masih berlaku.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 4. FAQ -->
+    <section id="page-faq" class="page-section">
+      <h2 class="section-title">FREQUENTLY ASKED QUESTIONS (FAQ)</h2>
+      <p class="section-subtitle">Pertanyaan yang paling sering diajukan terkait layanan penyetaraan ijazah</p>
+      <div class="faq-item open">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Kenapa Berkas Saya Ditunda?</span><span>&#9662;</span>
+        </button>
+        <div class="faq-answer">Berkas ditunda apabila ada dokumen yang kurang jelas, halaman paspor belum lengkap, atau sedang menunggu verifikasi dari perguruan tinggi asal.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Bagaimana cara yang benar dalam memindai paspor?</span><span>&#9662;</span>
+        </button>
+        <div class="faq-answer">Pindai seluruh halaman paspor dari sampul depan hingga belakang secara berurutan dan berwarna dalam satu berkas PDF.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Kenapa Ijazah Bachelor saya disetarakan dengan Diploma Tiga?</span><span>&#9662;</span>
+        </button>
+        <div class="faq-answer">Penetapan kesetaraan didasarkan pada evaluasi beban kredit, lama studi, serta kerangka kualifikasi pendidikan negara asal terhadap KKNI.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Bagaimana cara memverifikasi keaslian SK Penyetaraan Ijazah?</span><span>&#9662;</span>
+        </button>
+        <div class="faq-answer">Keaslian SK dapat diperiksa melalui pemindaian QR Code yang tertera pada lembar SK untuk membuka halaman DETAIL SK resmi, atau melalui menu Verifikasi SK.</div>
+      </div>
+    </section>
+
+    <!-- 5A. SUBMENU: PENCARIAN SK (NOMOR SK, NAMA, + FOTO SK) -->
+    <section id="page-pencarian-sk" class="page-section">
+      <h2 class="section-title">Pencarian SK</h2>
+      <p class="section-subtitle">Cari data Surat Keputusan (SK) berdasarkan Nomor SK atau Nama pemilik SK</p>
+      <div class="card">
+        <div class="form-group">
+          <label class="form-label">Nomor SK atau Nama Lengkap</label>
+          <input type="text" id="inputCariSK" class="form-control form-control-rect" placeholder="Contoh: 1307/Dikti/Kep/IJLN/2026 atau Muhammad Dani..." />
+        </div>
+        <button class="btn-primary" style="width:100%;" onclick="cariDataSK()">Cari Data SK</button>
+      </div>
+      <div id="hasilCariSKContainer"></div>
+    </section>
+
+    <!-- 5B. SUBMENU: PENCARIAN SK LAMA -->
+    <section id="page-pencarian-sk-lama" class="page-section">
+      <h2 class="section-title">Pencarian SK Lama</h2>
+      <p class="section-subtitle">Pencarian arsip SK Penyetaraan Ijazah terbitan periode sebelumnya</p>
+      <div class="card">
+        <div class="form-group">
+          <label class="form-label">Nomor SK Lama / Nama</label>
+          <input type="text" id="inputCariSKLama" class="form-control form-control-rect" placeholder="Masukkan Nomor SK Lama atau Nama..." />
+        </div>
+        <button class="btn-primary" style="width:100%;" onclick="alert('Data arsip SK lama tidak ditemukan atau silakan gunakan menu Pencarian SK terbaru.')">Cari SK Lama</button>
+      </div>
+    </section>
+    <!-- 5C. SUBMENU: CEK STATUS USULAN -->
+    <section id="page-cek-status" class="page-section">
+      <h2 class="section-title">Cek Status Usulan</h2>
+      <p class="section-subtitle">Pantau perkembangan proses usulan penyetaraan ijazah Anda</p>
+      <div class="card">
+        <div class="form-group">
+          <label class="form-label">Nomor Registrasi Usulan / Nomor SK</label>
+          <input type="text" id="inputStatusUsulan" class="form-control form-control-rect" placeholder="Masukkan nomor usulan atau nomor SK..." />
+        </div>
+        <button class="btn-primary" style="width:100%;" onclick="cekStatusUsulan()">Cek Status</button>
+        <div id="hasilStatusUsulan" style="margin-top:16px;"></div>
+      </div>
+    </section>
+
+    <!-- 5D. SUBMENU: PENCARIAN PERGURUAN TINGGI -->
+    <section id="page-pencarian-pt" class="page-section">
+      <h2 class="section-title">Pencarian Perguruan Tinggi</h2>
+      <p class="section-subtitle">Daftar perguruan tinggi luar negeri yang terdata pada sistem PILN</p>
+      <div class="card">
+        <div class="form-group">
+          <label class="form-label">Nama Perguruan Tinggi / Negara</label>
+          <input type="text" id="inputCariPT" class="form-control form-control-rect" placeholder="Contoh: Jinan University, Lebanon, Taiwan..." />
+        </div>
+        <button class="btn-primary" style="width:100%;" onclick="cariPerguruanTinggi()">Cari Perguruan Tinggi</button>
+        <div id="hasilCariPT" style="margin-top:16px;"></div>
+      </div>
+    </section>
+
+    <!-- 6. VERIFIKASI SK (TAMPILAN CEKDOKUMEN.ID) -->
+    <section id="page-verifikasi-sk" class="page-section">
+      <div class="verify-box">
+        <div style="display:flex; justify-content:flex-end; gap:8px; margin-bottom:24px;">
+          <span style="background:#0f172a; color:#fff; padding:4px 10px; border-radius:999px; font-size:0.78rem; font-weight:700;">ID</span>
+          <span style="background:#e2e8f0; color:#334155; padding:4px 10px; border-radius:999px; font-size:0.78rem; font-weight:700;">EN</span>
+        </div>
+        <div class="verify-logo">Cek<span>Dokumen.id</span></div>
+        <p style="font-weight:700; color:#1e293b; margin-bottom:8px;">Verifikasi tanda tangan digital PDF kamu.</p>
+        <input type="file" id="pdfVerifyInput" accept="application/pdf" class="hidden" onchange="prosesVerifikasiPDF(event)" />
+        <button class="btn-yellow-pill" onclick="document.getElementById('pdfVerifyInput').click()">
+          <span>Pilih File PDF kamu (maks 5 PDF)</span>
+          <span style="background:#0f172a; color:#fff; width:24px; height:24px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;">+</span>
+        </button>
+        <div style="display:flex; justify-content:center; gap:16px; font-size:0.82rem; font-weight:600; color:#475569; margin-top:8px;">
+          <span>&#10003; Gratis</span>
+          <span>&#128737; 100% Terpercaya</span>
+          <span>&#9201; Instan</span>
+        </div>
+        <div id="hasilVerifikasiPDF" style="margin-top:20px; text-align:left;"></div>
+      </div>
+    </section>
+
+    <!-- 7. REGISTRASI (BUAT AKUN PENGGUNA) -->
+    <section id="page-registrasi" class="page-section">
+      <div class="auth-card">
+        <h2>Buat Akun Pengguna</h2>
+        <form onsubmit="handleRegistrasi(event)">
+          <div class="form-group">
+            <label class="form-label">Email <span>*</span></label>
+            <input type="email" id="regEmail" class="form-control" placeholder="Masukan Email Anda" required />
+          </div>
+          <div class="recaptcha-box">
+            <div class="recaptcha-left">
+              <input type="checkbox" id="regCaptcha" required />
+              <label for="regCaptcha">Saya bukan robot</label>
+            </div>
+            <div style="text-align:center; font-size:0.65rem; color:#64748b;">
+              <div style="font-weight:800; color:#2563eb; font-size:0.9rem;">&#8635;</div>
+              reCAPTCHA
+            </div>
+          </div>
+          <button type="submit" class="btn-primary btn-pill">Registrasi</button>
+        </form>
+        <div class="auth-footer-link">
+          Sudah memiliki akun? <a onclick="navigateTo('login')">Login!</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. LOGIN PENDAFTAR (INFORMASI AKUN) -->
+    <section id="page-login" class="page-section">
+      <div class="auth-card">
+        <h2>Informasi Akun</h2>
+        <form onsubmit="handleLoginPendaftar(event)">
+          <div class="form-group">
+            <label class="form-label">Email <span>*</span></label>
+            <input type="email" id="loginEmail" class="form-control" placeholder="Masukkan Email Anda" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kata Sandi <span>*</span></label>
+            <input type="password" id="loginPassword" class="form-control" placeholder="Masukkan Kata Sandi Anda" required />
+          </div>
+          <div style="margin-bottom:20px;">
+            <a style="color:#3b66d4; font-size:0.9rem; text-decoration:underline; cursor:pointer;" onclick="alert('Tautan pengaturan ulang kata sandi telah dikirimkan ke email terdaftar.')">Lupa kata sandi?</a>
+          </div>
+          <button type="submit" class="btn-primary btn-pill">Login</button>
+        </form>
+        <div class="auth-footer-link">
+          Belum memiliki akun? <a onclick="navigateTo('registrasi')">Daftar</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. HALAMAN DETAIL SK (TUJUAN UTAMA LINK CUSTOM / HASIL SCAN QR) -->
+    <section id="page-detail-sk" class="page-section">
+      <div class="detail-sk-header">
+        <h2>DETAIL SK</h2>
+        <span class="status-active" id="detailStatusBadge">Active</span>
+      </div>
+
+      <div class="detail-sk-card" id="detailSkCard">
+        <div class="detail-row">
+          <div class="detail-label">Nama</div>
+          <div class="detail-value" id="d-nama">-</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Tempat, Tanggal Lahir</div>
+          <div class="detail-value" id="d-ttl">-</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Negara/Wilayah</div>
+          <div class="detail-value" id="d-negara">-</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Bidang Studi</div>
+          <div class="detail-value" id="d-bidang">-</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Gelar</div>
+          <div class="detail-value" id="d-gelar">-</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Nomor SK Penyetaraan</div>
+          <div class="detail-value" id="d-sk-penyetaraan">-</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Nomor SK Konversi Nilai</div>
+          <div class="detail-value" id="d-sk-konversi">-</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Hasil Kesetaraan</div>
+          <div class="detail-value" id="d-hasil-setara">-</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Hasil Konversi Nilai</div>
+          <div class="detail-value" id="d-hasil-ipk">-</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Status</div>
+          <div class="detail-value" id="d-status">-</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. PANEL ADMIN TERSEMBUNYI (DIAKSES LEWAT JALUR KHUSUS LINK UTAMA) -->
+    <section id="page-admin" class="page-section">
+      <div class="admin-banner">
+        <div>
+          <span class="admin-badge">MODE ADMIN PENERBITAN SK</span>
+          <div style="font-size:0.85rem; margin-top:4px;">Kelola Data SK, Foto SK &amp; Link Custom QR</div>
+        </div>
+        <button class="btn-outline" style="padding:6px 14px; font-size:0.82rem;" onclick="keluarAdmin()">Keluar Mode Admin</button>
+      </div>
+
+      <!-- Form Login Admin bila belum terautentikasi -->
+      <div id="adminAuthBox" class="auth-card">
+        <h2>Akses Administrator</h2>
+        <form onsubmit="verifikasiPinAdmin(event)">
+          <div class="form-group">
+            <label class="form-label">Kode Akses Admin <span>*</span></label>
+            <input type="password" id="adminPinInput" class="form-control" placeholder="Masukkan kode akses admin..." required />
+          </div>
+          <button type="submit" class="btn-primary btn-pill">Masuk Panel Admin</button>
+        </form>
+      </div>
+
+      <!-- Dashboard Input & Daftar SK -->
+      <div id="adminWorkspace" class="hidden">
+        <div class="card">
+          <h3 style="margin-bottom:14px; color:var(--primary);" id="formAdminTitle">Tambah / Edit Data SK</h3>
+          <form onsubmit="simpanDataSK(event)">
+            <input type="hidden" id="editIndex" value="-1" />
+            <div class="form-group">
+              <label class="form-label">Slug / Kode Link Custom QR <span>*</span></label>
+              <input type="text" id="f-slug" class="form-control form-control-rect" placeholder="Contoh: 1307-dikti-2026" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nama Lengkap <span>*</span></label>
+              <input type="text" id="f-nama" class="form-control form-control-rect" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tempat, Tanggal Lahir <span>*</span></label>
+              <input type="text" id="f-ttl" class="form-control form-control-rect" placeholder="Contoh: Bandar Lampung, 14 Mei 1999" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Perguruan Tinggi <span>*</span></label>
+              <input type="text" id="f-pt" class="form-control form-control-rect" placeholder="Contoh: Jinan University" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Negara/Wilayah <span>*</span></label>
+              <input type="text" id="f-negara" class="form-control form-control-rect" placeholder="Contoh: Lebanon" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Bidang Studi <span>*</span></label>
+              <input type="text" id="f-bidang" class="form-control form-control-rect" placeholder="Contoh: Political Science" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Gelar <span>*</span></label>
+              <input type="text" id="f-gelar" class="form-control form-control-rect" placeholder="Contoh: Bachelor" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Jenis SK <span>*</span></label>
+              <input type="text" id="f-jenis" class="form-control form-control-rect" value="Penyetaraan Ijazah dan Konversi Nilai" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nomor SK Penyetaraan <span>*</span></label>
+              <input type="text" id="f-sk-penyetaraan" class="form-control form-control-rect" placeholder="Contoh: 1307/Dikti/Kep/IJLN/2026" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nomor SK Konversi Nilai <span>*</span></label>
+              <input type="text" id="f-sk-konversi" class="form-control form-control-rect" placeholder="Contoh: 1307/Dikti/Kep/IJLN/2026" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Hasil Kesetaraan <span>*</span></label>
+              <input type="text" id="f-hasil-setara" class="form-control form-control-rect" placeholder="Contoh: Sarjana" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Hasil Konversi Nilai <span>*</span></label>
+              <input type="text" id="f-hasil-ipk" class="form-control form-control-rect" placeholder="Contoh: 3.13" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Status Usulan <span>*</span></label>
+              <input type="text" id="f-status" class="form-control form-control-rect" value="Usulan Selesai Diproses" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Foto SK / Pemilik SK (Unggah Gambar atau URL)</label>
+              <input type="file" id="f-foto-file" accept="image/*" class="form-control form-control-rect" onchange="handleUploadFotoSK(event)" />
+              <input type="text" id="f-foto-url" class="form-control form-control-rect" style="margin-top:8px;" placeholder="Atau tempel URL foto / DataURL..." />
+            </div>
+            <div style="display:flex; gap:10px;">
+              <button type="submit" class="btn-primary" style="flex:1;">Simpan Data SK</button>
+              <button type="button" class="btn-outline" onclick="resetFormAdmin()">Batal</button>
+            </div>
+          </form>
+        </div>
+
+        <h3 style="margin:20px 0 12px; color:#1e293b;">Daftar SK Terbit &amp; Link QR</h3>
+        <div id="adminSkList"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER KHAS KEMDIKTISAINTEK -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-org">
+        Kementerian Pendidikan Tinggi, Sains, dan Teknologi Republik Indonesia
+      </div>
+      <div class="footer-address">
+        Alamat: Gedung D, Jalan Jenderal Sudirman Pintu Satu, Senayan, Jakarta Pusat 10270<br>
+        Call Center : 021126
+      </div>
+      <div class="footer-socials">
+        <span>&#9679; ditjen.dikti</span>
+        <span>&#9679; @ditjen.dikti</span>
+        <span>&#9679; @ditjendikti</span>
+      </div>
+      <div class="footer-badges">
+        <div class="badge-card">
+          <div style="font-size:0.75rem; color:#475569; margin-bottom:4px;">Anda Punya Keluhan?</div>
+          <div class="badge-lapor">LAPOR!</div>
+          <div style="font-size:0.65rem; color:#64748b;">LAYANAN ASPIRASI DAN PENGADUAN ONLINE RAKYAT</div>
+        </div>
+        <div class="badge-card">
+          <div style="font-size:0.75rem; color:#475569; margin-bottom:4px;">Didukung Oleh:</div>
+          <div class="badge-bsre">Balai Sertifikasi Elektronik</div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        &copy; 2026 Kementerian Pendidikan Tinggi, Sains, dan Teknologi Republik Indonesia (KEMDIKTISAINTEK). Hak Cipta Dilindungi Undang-Undang.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // =========================================================================
+    // KONFIGURASI LINK CUSTOM & AKSES ADMIN
+    // =========================================================================
+    const CUSTOM_LINK_CONFIG = {
+      displayDomainLabel: "Piln.Kemenditisaintek.go.id",
+      adminSecretParam: "portal_admin", // Buka jalur admin lewat URL: ?portal_admin=1
+      adminAccessCode: "ADMIN2026"      // Kode akses masuk panel admin
+    };
+
+    const STORAGE_KEY = "kemdiktisaintek_sk_records_v1";
+
+    // Foto SVG default jika belum diunggah
+    const DEFAULT_PHOTO = "data:image/svg+xml;utf8," + encodeURIComponent(
+      `<svg xmlns="http://www.w3.org/2000/svg" width="240" height="300" viewBox="0 0 240 300">
+        <rect width="240" height="300" fill="#e2e8f0"/>
+        <circle cx="120" cy="105" r="46" fill="#94a3b8"/>
+        <path d="M45 270c0-45 34-75 75-75s75 30 75 75" fill="#94a3b8"/>
+        <text x="120" y="290" font-family="sans-serif" font-size="12" fill="#475569" text-anchor="middle">FOTO SK / PEMILIK</text>
+      </svg>`
+    );
+
+    // Data awal contoh sesuai gambar referensi
+    const DEFAULT_RECORDS = [
+      {
+        slug: "1307-dikti-2026",
+        nama: "Muhammad Dani Saut Maruli",
+        ttl: "Bandar Lampung, 14 Mei 1999",
+        perguruanTinggi: "Jinan University",
+        negara: "Lebanon",
+        bidangStudi: "Political Science",
+        gelar: "Bachelor",
+        jenisSK: "Penyetaraan Ijazah dan Konversi Nilai",
+        nomorSKPenyetaraan: "1307/Dikti/Kep/IJLN/2026",
+        nomorSKKonversi: "1307/Dikti/Kep/IJLN/2026",
+        hasilKesetaraan: "Sarjana",
+        hasilKonversi: "3.13",
+        status: "Usulan Selesai Diproses",
+        fotoSK: DEFAULT_PHOTO
+      }
+    ];
+
+    function getRecords() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_RECORDS));
+        return [...DEFAULT_RECORDS];
+      }
+      try {
+        return JSON.parse(raw);
+      } catch (e) {
+        return [...DEFAULT_RECORDS];
+      }
+    }
+
+    function saveRecords(list) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    }
+
+    // =========================================================================
+    // NAVIGASI HALAMAN & DRAWER
+    // =========================================================================
+    function toggleDrawer(open) {
+      const drawer = document.getElementById("navDrawer");
+      const overlay = document.getElementById("drawerOverlay");
+      if (open) {
+        drawer.classList.add("open");
+        overlay.classList.add("open");
+      } else {
+        drawer.classList.remove("open");
+        overlay.classList.remove("open");
+      }
+    }
+
+    function toggleSubmenu() {
+      document.getElementById("pencarianSubmenu").classList.toggle("open");
+    }
+
+    function navigateTo(pageId, pushState = true) {
+      document.querySelectorAll(".page-section").forEach(sec => sec.classList.remove("active"));
+      const target = document.getElementById("page-" + pageId);
+      if (target) {
+        target.classList.add("active");
+      }
+
+      document.querySelectorAll(".menu-link").forEach(link => {
+        link.classList.toggle("active", link.dataset.page === pageId);
+      });
+
+      toggleDrawer(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      if (pushState && pageId !== "detail-sk" && pageId !== "admin") {
+        const cleanUrl = window.location.pathname;
+        window.history.replaceState({}, "", cleanUrl);
+      }
+    }
+
+    // =========================================================================
+    // LOGIKA LINK CUSTOM / SCAN QR -> HALAMAN DETAIL SK
+    // =========================================================================
+    function renderDetailSK(record) {
+      document.getElementById("detailStatusBadge").textContent = "Active";
+      document.getElementById("d-nama").textContent = record.nama;
+      document.getElementById("d-ttl").textContent = record.ttl;
+      document.getElementById("d-negara").textContent = record.negara;
+      document.getElementById("d-bidang").textContent = record.bidangStudi;
+      document.getElementById("d-gelar").textContent = record.gelar;
+      document.getElementById("d-sk-penyetaraan").textContent = record.nomorSKPenyetaraan;
+      document.getElementById("d-sk-konversi").textContent = record.nomorSKKonversi;
+      document.getElementById("d-hasil-setara").textContent = record.hasilKesetaraan;
+      document.getElementById("d-hasil-ipk").textContent = record.hasilKonversi;
+      document.getElementById("d-status").textContent = record.status;
+      navigateTo("detail-sk", false);
+    }
+
+    function buildCustomSKUrl(slug) {
+      const base = window.location.origin + window.location.pathname;
+      return `${base}?sk=${encodeURIComponent(slug)}`;
+    }
+
+    // =========================================================================
+    // PENCARIAN SK (NOMOR SK, NAMA, + FOTO SK) & SUB-MENU LAINNYA
+    // =========================================================================
+    function cariDataSK() {
+      const q = document.getElementById("inputCariSK").value.trim().toLowerCase();
+      const container = document.getElementById("hasilCariSKContainer");
+      if (!q) {
+        container.innerHTML = `<div class="card" style="color:#dc2626;">Silakan masukkan Nomor SK atau Nama terlebih dahulu.</div>`;
+        return;
+      }
+
+      const matches = getRecords().filter(item =>
+        item.nomorSKPenyetaraan.toLowerCase().includes(q) ||
+        item.nama.toLowerCase().includes(q)
+      );
+      if (matches.length === 0) {
+        container.innerHTML = `<div class="card">Data SK dengan kata kunci <strong>${q}</strong> tidak ditemukan.</div>`;
+        return;
+      }
+
+      container.innerHTML = matches.map(item => `
+        <div class="sk-search-result">
+          <img src="${item.fotoSK || DEFAULT_PHOTO}" alt="Foto SK ${item.nama}" class="sk-photo-preview" />
+          <div style="margin-bottom:12px;">
+            <div style="font-size:0.85rem; color:#64748b;">Nomor SK</div>
+            <div style="font-weight:700; color:#1e293b; margin-bottom:8px;">${item.nomorSKPenyetaraan}</div>
+            <div style="font-size:0.85rem; color:#64748b;">Jenis SK</div>
+            <div style="font-weight:600; color:#334155;">${item.jenisSK || 'Penyetaraan Ijazah dan Konversi Nilai'}</div>
+          </div>
+          <table class="sk-table">
+            <tr><td>Nama</td><td>${item.nama}</td></tr>
+            <tr><td>Tempat, Tanggal Lahir</td><td>${item.ttl}</td></tr>
+            <tr><td>Perguruan Tinggi</td><td>${item.perguruanTinggi || '-'}</td></tr>
+            <tr><td>Gelar</td><td>${item.gelar}</td></tr>
+            <tr><td>Bidang Studi</td><td>${item.bidangStudi}</td></tr>
+          </table>
+          <div style="margin-top:14px; text-align:right;">
+            <button class="btn-primary" onclick='bukaDetailDariPencarian("${item.slug}")'>Buka Detail SK &rarr;</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function bukaDetailDariPencarian(slug) {
+      const found = getRecords().find(r => r.slug === slug);
+      if (found) {
+        window.history.replaceState({}, "", `?sk=${encodeURIComponent(slug)}`);
+        renderDetailSK(found);
+      }
+    }
+
+    function cekStatusUsulan() {
+      const q = document.getElementById("inputStatusUsulan").value.trim().toLowerCase();
+      const box = document.getElementById("hasilStatusUsulan");
+      const found = getRecords().find(r =>
+        r.nomorSKPenyetaraan.toLowerCase().includes(q) || r.nama.toLowerCase().includes(q)
+      );
+      if (found && q) {
+        box.innerHTML = `<div style="padding:12px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; color:#166534;">
+          <strong>${found.nama}</strong> (${found.nomorSKPenyetaraan})<br>Status: <strong>${found.status}</strong>
+        </div>`;
+      } else {
+        box.innerHTML = `<div style="padding:12px; background:#fef2f2; border:1px solid #fecaca; border-radius:8px; color:#991b1b;">
+          Data usulan tidak ditemukan. Periksa kembali nomor registrasi atau nomor SK Anda.
+        </div>`;
+      }
+    }
+
+    function cariPerguruanTinggi() {
+      const q = document.getElementById("inputCariPT").value.trim().toLowerCase();
+      const box = document.getElementById("hasilCariPT");
+      const matches = getRecords().filter(r =>
+        (r.perguruanTinggi || "").toLowerCase().includes(q) || (r.negara || "").toLowerCase().includes(q)
+      );
+      if (matches.length > 0 && q) {
+        box.innerHTML = matches.map(m => `
+          <div style="padding:10px; border:1px solid #e2e8f0; border-radius:8px; margin-bottom:8px;">
+            <strong>${m.perguruanTinggi}</strong> &mdash; ${m.negara} <span style="color:#16a34a; font-weight:600;">(Terdata)</span>
+          </div>
+        `).join("");
+      } else {
+        box.innerHTML = `<div style="color:#64748b; font-size:0.9rem;">Masukkan nama perguruan tinggi atau negara yang terdata.</div>`;
+      }
+    }
+
+    // =========================================================================
+    // VERIFIKASI PDF, REGISTRASI & LOGIN PENDAFTAR
+    // =========================================================================
+    function prosesVerifikasiPDF(event) {
+      const file = event.target.files[0];
+      const out = document.getElementById("hasilVerifikasiPDF");
+      if (!file) return;
+      out.innerHTML = `
+        <div class="card" style="border-left:4px solid #16a34a;">
+          <div style="font-weight:700; color:#166534;">&#10003; Dokumen PDF Diterima: ${file.name}</div>
+          <div style="font-size:0.88rem; color:#475569; margin-top:4px;">
+            Ukuran: ${(file.size / 1024).toFixed(1)} KB &bull; Penandatangan Elektronik: Balai Sertifikasi Elektronik (BSrE).<br>
+            Untuk mencocokkan isi SK secara langsung, pindai QR Code pada dokumen atau gunakan menu <strong>Pencarian SK</strong>.
+          </div>
+        </div>
+      `;
+    }
+
+    function handleRegistrasi(e) {
+      e.preventDefault();
+      const email = document.getElementById("regEmail").value;
+      alert(`Pendaftaran akun untuk ${email} berhasil diproses. Silakan cek kotak masuk email Anda untuk aktivasi lalu masuk melalui menu Login.`);
+      navigateTo("login");
+    }
+
+    function handleLoginPendaftar(e) {
+      e.preventDefault();
+      const email = document.getElementById("loginEmail").value;
+      alert(`Berhasil masuk sebagai Pendaftar (${email}). Dashboard pengusul siap digunakan.`);
+      navigateTo("beranda");
+    }
+
+    // =========================================================================
+    // MODE ADMIN TERSEMBUNYI (HANYA DARI JALUR KHUSUS LINK UTAMA)
+    // =========================================================================
+    let tapCount = 0;
+    let tapTimer = null;
+    // Pintasan rahasia tambahan: ketuk judul KEMDIKTISAINTEK 5x cepat di link utama
+    document.getElementById("brandTrigger").addEventListener("click", () => {
+      tapCount++;
+      clearTimeout(tapTimer);
+      tapTimer = setTimeout(() => { tapCount = 0; }, 1200);
+      if (tapCount >= 5) {
+        tapCount = 0;
+        bukaModeAdmin();
+      }
+    });
+
+    function bukaModeAdmin() {
+      navigateTo("admin", false);
+      const isUnlocked = sessionStorage.getItem("kemdik_admin_unlocked") === "1";
+      document.getElementById("adminAuthBox").classList.toggle("hidden", isUnlocked);
+      document.getElementById("adminWorkspace").classList.toggle("hidden", !isUnlocked);
+      if (isUnlocked) renderAdminList();
+    }
+
+    function verifikasiPinAdmin(e) {
+      e.preventDefault();
+      const pin = document.getElementById("adminPinInput").value.trim();
+      if (pin === CUSTOM_LINK_CONFIG.adminAccessCode) {
+        sessionStorage.setItem("kemdik_admin_unlocked", "1");
+        document.getElementById("adminAuthBox").classList.add("hidden");
+        document.getElementById("adminWorkspace").classList.remove("hidden");
+        renderAdminList();
+      } else {
+        alert("Kode akses admin tidak valid.");
+      }
+    }
+
+    function keluarAdmin() {
+      sessionStorage.removeItem("kemdik_admin_unlocked");
+      navigateTo("beranda");
+    }
+
+    function handleUploadFotoSK(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        document.getElementById("f-foto-url").value = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function simpanDataSK(e) {
+      e.preventDefault();
+      const list = getRecords();
+      const idx = parseInt(document.getElementById("editIndex").value, 10);
+      const item = {
+        slug: document.getElementById("f-slug").value.trim(),
+        nama: document.getElementById("f-nama").value.trim(),
+        ttl: document.getElementById("f-ttl").value.trim(),
+        perguruanTinggi: document.getElementById("f-pt").value.trim(),
+        negara: document.getElementById("f-negara").value.trim(),
+        bidangStudi: document.getElementById("f-bidang").value.trim(),
+        gelar: document.getElementById("f-gelar").value.trim(),
+        jenisSK: document.getElementById("f-jenis").value.trim(),
+        nomorSKPenyetaraan: document.getElementById("f-sk-penyetaraan").value.trim(),
+        nomorSKKonversi: document.getElementById("f-sk-konversi").value.trim(),
+        hasilKesetaraan: document.getElementById("f-hasil-setara").value.trim(),
+        hasilKonversi: document.getElementById("f-hasil-ipk").value.trim(),
+        status: document.getElementById("f-status").value.trim(),
+        fotoSK: document.getElementById("f-foto-url").value.trim() || DEFAULT_PHOTO
+      };
+
+      if (idx >= 0) {
+        list[idx] = item;
+      } else {
+        list.unshift(item);
+      }
+      saveRecords(list);
+      resetFormAdmin();
+      renderAdminList();
+      alert("Data SK berhasil disimpan!");
+    }
+
+    function editDataSK(index) {
+      const item = getRecords()[index];
+      if (!item) return;
+      document.getElementById("editIndex").value = index;
+      document.getElementById("f-slug").value = item.slug;
+      document.getElementById("f-nama").value = item.nama;
+      document.getElementById("f-ttl").value = item.ttl;
+      document.getElementById("f-pt").value = item.perguruanTinggi || "";
+      document.getElementById("f-negara").value = item.negara;
+      document.getElementById("f-bidang").value = item.bidangStudi;
+      document.getElementById("f-gelar").value = item.gelar;
+      document.getElementById("f-jenis").value = item.jenisSK || "Penyetaraan Ijazah dan Konversi Nilai";
+      document.getElementById("f-sk-penyetaraan").value = item.nomorSKPenyetaraan;
+      document.getElementById("f-sk-konversi").value = item.nomorSKKonversi;
+      document.getElementById("f-hasil-setara").value = item.hasilKesetaraan;
+      document.getElementById("f-hasil-ipk").value = item.hasilKonversi;
+      document.getElementById("f-status").value = item.status;
+      document.getElementById("f-foto-url").value = item.fotoSK || "";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function hapusDataSK(index) {
+      if (!confirm("Hapus data SK ini?")) return;
+      const list = getRecords();
+      list.splice(index, 1);
+      saveRecords(list);
+      renderAdminList();
+    }
+
+    function resetFormAdmin() {
+      document.getElementById("editIndex").value = "-1";
+      document.querySelector("#adminWorkspace form").reset();
+      document.getElementById("f-jenis").value = "Penyetaraan Ijazah dan Konversi Nilai";
+      document.getElementById("f-status").value = "Usulan Selesai Diproses";
+    }
+
+    function salinLinkQR(slug) {
+      const url = buildCustomSKUrl(slug);
+      navigator.clipboard.writeText(url).then(() => {
+        alert(`Link QR DETAIL SK disalin:\n${url}\n\n(Label Identitas: ${CUSTOM_LINK_CONFIG.displayDomainLabel})`);
+      });
+    }
+
+    function renderAdminList() {
+      const container = document.getElementById("adminSkList");
+      const list = getRecords();
+      container.innerHTML = list.map((item, idx) => `
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
+            <div>
+              <strong>${item.nama}</strong>
+              <div style="font-size:0.85rem; color:#475569;">${item.nomorSKPenyetaraan}</div>
+              <div style="font-size:0.8rem; color:#16a34a; margin-top:4px;">Slug QR: <code>?sk=${item.slug}</code></div>
+            </div>
+            <img src="${item.fotoSK || DEFAULT_PHOTO}" style="width:52px; height:64px; object-fit:cover; border-radius:6px; border:1px solid #cbd5e1;" />
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;">
+            <button class="btn-primary" style="padding:8px 12px; font-size:0.82rem;" onclick="salinLinkQR('${item.slug}')">Salin Link QR</button>
+            <button class="btn-outline" style="padding:8px 12px; font-size:0.82rem;" onclick="bukaDetailDariPencarian('${item.slug}')">Lihat Detail SK</button>
+            <button class="btn-outline" style="padding:8px 12px; font-size:0.82rem;" onclick="editDataSK(${idx})">Edit</button>
+            <button class="btn-outline" style="padding:8px 12px; font-size:0.82rem; color:#dc2626;" onclick="hapusDataSK(${idx})">Hapus</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // =========================================================================
+    // INISIALISASI SAAT HALAMAN DIBUKA
+    // =========================================================================
+    (function initApp() {
+      const params = new URLSearchParams(window.location.search);
+      const skSlug = params.get("sk");
+      const isAdminParam = params.get(CUSTOM_LINK_CONFIG.adminSecretParam);
+
+      // 1. Jika dibuka dari link custom / hasil scan QR (?sk=...) -> Langsung ke DETAIL SK
+      if (skSlug) {
+        const list = getRecords();
+        const found = list.find(r => r.slug.toLowerCase() === skSlug.toLowerCase()) || list[0];
+        if (found) {
+          renderDetailSK(found);
+          return;
+        }
+      }
+
+      // 2. Jika dibuka dari jalur khusus admin (?portal_admin=1) -> Buka akses admin
+      if (isAdminParam === "1") {
+        bukaModeAdmin();
+        return;
+      }
+
+      // 3. Default buka Beranda
+      navigateTo("beranda", false);
+    })();
+  </script>
+</body>
+</html>
