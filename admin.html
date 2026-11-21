@@ -1,0 +1,1329 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KEMDIKTISAINTEK - DETAIL SK</title>
+    <!-- Memuat Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Memuat Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        kemdikti: {
+                            orange: '#e59838',
+                            orangeDark: '#d18224',
+                            navy: '#1e293b',
+                            dark: '#1a1a1a',
+                            heading: '#4a4a4a',
+                            mint: '#5cb85c',
+                            label: '#6e6e6e',
+                            border: '#ebebeb',
+                            bg: '#ffffff'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #ffffff;
+            color: #4a4a4a;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .view-section {
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-white">
+
+    <!-- 1. HEADER & NAVBAR (Identik dengan Referensi Gambar 1 & 2) -->
+    <header class="bg-white border-b-[3px] border-[#e59838] sticky top-0 z-40">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <!-- Brand Title -->
+            <button type="button" onclick="openDefaultDetailView()" class="flex items-center text-left focus:outline-none">
+                <span class="text-[#1a1a1a] font-extrabold text-[19px] sm:text-xl tracking-wide uppercase">
+                    KEMDIKTISAINTEK
+                </span>
+            </button>
+
+            <!-- Desktop Navigation Menu (Tampil rapi di layar lebar lg+) -->
+            <nav class="hidden lg:flex items-center space-x-1 text-[13.5px] font-medium text-[#6e6e6e]">
+                <button onclick="navigateTo('beranda')" data-nav="beranda" class="nav-item flex items-center gap-1.5 px-3 py-2 rounded-md hover:bg-gray-50 hover:text-[#1a1a1a] transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z"/><path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z"/></svg>
+                    <span>Beranda</span>
+                </button>
+
+                <button onclick="navigateTo('pengumuman')" data-nav="pengumuman" class="nav-item flex items-center gap-1.5 px-3 py-2 rounded-md hover:bg-gray-50 hover:text-[#1a1a1a] transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M4.125 3C3.089 3 2.25 3.84 2.25 4.875V18a3 3 0 003 3h15a3 3 0 01-3-3V4.875C17.25 3.839 16.41 3 15.375 3H4.125zM12 9.75a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H12zm-.75-2.25a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5H12a.75.75 0 01-.75-.75zM6 12.75a.75.75 0 000 1.5h7.5a.75.75 0 000-1.5H6zm-.75 3.75a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5H6a.75.75 0 01-.75-.75zM6 6.75a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h3a.75.75 0 00.75-.75v-3A.75.75 0 009 6.75H6z" clip-rule="evenodd"/><path d="M18.75 6.75h1.875c.621 0 1.125.504 1.125 1.125V18a1.5 1.5 0 01-3 0V6.75z"/></svg>
+                    <span>Pengumuman</span>
+                </button>
+
+                <button onclick="navigateTo('syarat')" data-nav="syarat" class="nav-item flex items-center gap-1.5 px-3 py-2 rounded-md hover:bg-gray-50 hover:text-[#1a1a1a] transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd"/></svg>
+                    <span>Syarat</span>
+                </button>
+
+                <button onclick="navigateTo('faq')" data-nav="faq" class="nav-item flex items-center gap-1.5 px-3 py-2 rounded-md hover:bg-gray-50 hover:text-[#1a1a1a] transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd"/></svg>
+                    <span>FAQ</span>
+                </button>
+
+                <!-- Dropdown Pencarian Data (Desktop) -->
+                <div class="relative" id="desktopSearchDropdownWrapper">
+                    <button type="button" onclick="toggleDesktopDropdown()" data-nav="pencarian" class="nav-item flex items-center gap-1.5 px-3 py-2 rounded-md hover:bg-gray-50 hover:text-[#1a1a1a] transition-colors">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M20 20l-3.5-3.5"/></svg>
+                        <span>Pencarian Data</span>
+                        <svg class="w-3.5 h-3.5 transition-transform" id="desktopDropdownArrow" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+                    </button>
+                    <div id="desktopSearchDropdown" class="hidden absolute left-0 mt-1.5 w-60 bg-white border border-[#ebebeb] rounded-lg shadow-lg py-1.5 z-50">
+                        <button onclick="openSearchSkForm(); closeDesktopDropdown();" class="w-full text-left px-4 py-2.5 text-sm text-[#4a4a4a] hover:bg-orange-50/70 hover:text-[#d18224] flex items-center gap-2.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#e59838]"></span>
+                            Pencarian SK Penyetaraan
+                        </button>
+                        <button onclick="navigateTo('ptln'); closeDesktopDropdown();" class="w-full text-left px-4 py-2.5 text-sm text-[#4a4a4a] hover:bg-orange-50/70 hover:text-[#d18224] flex items-center gap-2.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#e59838]"></span>
+                            Pencarian Perguruan Tinggi
+                        </button>
+                    </div>
+                </div>
+
+                <button onclick="openSearchSkForm()" data-nav="verifikasi" class="nav-item flex items-center gap-1.5 px-3 py-2 rounded-md hover:bg-gray-50 hover:text-[#1a1a1a] transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/></svg>
+                    <span>Verifikasi SK</span>
+                </button>
+
+                <button onclick="navigateTo('registrasi')" data-nav="registrasi" class="nav-item flex items-center gap-1.5 px-3 py-2 rounded-md hover:bg-gray-50 hover:text-[#1a1a1a] transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M4.5 3.75a3 3 0 00-3 3v10.5a3 3 0 003 3h15a3 3 0 003-3V6.75a3 3 0 00-3-3h-15zm4.125 3a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm-3.873 8.703a4.126 4.126 0 017.746 0 .75.75 0 01-.351.92 7.47 7.47 0 01-3.522.877 7.47 7.47 0 01-3.522-.877.75.75 0 01-.351-.92zM15 8.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15zM14.25 12a.75.75 0 01.75-.75h3.75a.75.75 0 010 1.5H15a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15z" clip-rule="evenodd"/></svg>
+                    <span>Registrasi</span>
+                </button>
+
+                <button onclick="navigateTo('login')" data-nav="login" id="desktopAuthBtn" class="nav-item flex items-center gap-1.5 px-3 py-2 rounded-md hover:bg-gray-50 hover:text-[#1a1a1a] transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M5.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM2.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM18.75 7.5a.75.75 0 00-1.5 0v2.25H15a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H21a.75.75 0 000-1.5h-2.25V7.5z"/></svg>
+                    <span id="desktopAuthText">Login</span>
+                </button>
+            </nav>
+
+            <!-- Tombol Hamburger Berbingkai Tipis (Identik dengan Referensi Gambar 1 & 2) -->
+            <button 
+                id="mobileMenuToggle"
+                type="button" 
+                aria-label="Toggle Menu Navigasi"
+                aria-expanded="false"
+                class="lg:hidden w-12 h-10 flex items-center justify-center rounded-[6px] border border-[#dcdcdc] bg-white hover:bg-gray-50 active:bg-gray-100 transition-colors focus:outline-none"
+            >
+                <svg class="w-5 h-5 text-[#7a7a7a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Drawer Menu Mobile (Persis seperti struktur & ikon pada Referensi Gambar 2) -->
+        <div id="mobileDrawer" class="hidden lg:hidden bg-white border-t border-gray-100 px-5 pt-2 pb-5 space-y-1 shadow-md">
+            <button onclick="navigateTo('beranda')" data-nav="beranda" class="mobile-nav-item w-full flex items-center gap-3.5 py-3 text-[15px] text-[#6e6e6e] hover:text-[#1a1a1a] transition-colors">
+                <svg class="w-5 h-5 text-[#6e6e6e] shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z"/><path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z"/></svg>
+                <span>Beranda</span>
+            </button>
+
+            <button onclick="navigateTo('pengumuman')" data-nav="pengumuman" class="mobile-nav-item w-full flex items-center gap-3.5 py-3 text-[15px] text-[#6e6e6e] hover:text-[#1a1a1a] transition-colors">
+                <svg class="w-5 h-5 text-[#6e6e6e] shrink-0" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M4.125 3C3.089 3 2.25 3.84 2.25 4.875V18a3 3 0 003 3h15a3 3 0 01-3-3V4.875C17.25 3.839 16.41 3 15.375 3H4.125zM12 9.75a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H12zm-.75-2.25a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5H12a.75.75 0 01-.75-.75zM6 12.75a.75.75 0 000 1.5h7.5a.75.75 0 000-1.5H6zm-.75 3.75a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5H6a.75.75 0 01-.75-.75zM6 6.75a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h3a.75.75 0 00.75-.75v-3A.75.75 0 009 6.75H6z" clip-rule="evenodd"/><path d="M18.75 6.75h1.875c.621 0 1.125.504 1.125 1.125V18a1.5 1.5 0 01-3 0V6.75z"/></svg>
+                <span>Pengumuman</span>
+            </button>
+
+            <button onclick="navigateTo('syarat')" data-nav="syarat" class="mobile-nav-item w-full flex items-center gap-3.5 py-3 text-[15px] text-[#6e6e6e] hover:text-[#1a1a1a] transition-colors">
+                <svg class="w-5 h-5 text-[#6e6e6e] shrink-0" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd"/></svg>
+                <span>Syarat</span>
+            </button>
+
+            <button onclick="navigateTo('faq')" data-nav="faq" class="mobile-nav-item w-full flex items-center gap-3.5 py-3 text-[15px] text-[#6e6e6e] hover:text-[#1a1a1a] transition-colors">
+                <svg class="w-5 h-5 text-[#6e6e6e] shrink-0" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd"/></svg>
+                <span>FAQ</span>
+            </button>
+
+            <!-- Pencarian Data dengan Sub-Menu Accordion -->
+            <div>
+                <button type="button" onclick="toggleMobileSubmenu()" class="w-full flex items-center justify-between py-3 text-[15px] text-[#6e6e6e] hover:text-[#1a1a1a] transition-colors">
+                    <span class="flex items-center gap-3.5">
+                        <svg class="w-5 h-5 text-[#6e6e6e] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M20 20l-3.5-3.5"/></svg>
+                        <span>Pencarian Data</span>
+                        <svg id="mobileSubmenuCaret" class="w-3.5 h-3.5 text-[#6e6e6e] transition-transform" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg>
+                    </span>
+                </button>
+                <div id="mobileSearchSubmenu" class="hidden pl-9 pr-2 pb-2 space-y-1">
+                    <button onclick="openSearchSkForm()" class="w-full text-left py-2 px-3 rounded-md text-sm text-[#4a4a4a] hover:bg-orange-50 hover:text-[#d18224] flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#e59838]"></span>
+                        Pencarian SK Penyetaraan
+                    </button>
+                    <button onclick="navigateTo('ptln')" class="w-full text-left py-2 px-3 rounded-md text-sm text-[#4a4a4a] hover:bg-orange-50 hover:text-[#d18224] flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#e59838]"></span>
+                        Pencarian Perguruan Tinggi
+                    </button>
+                </div>
+            </div>
+
+            <button onclick="openSearchSkForm()" data-nav="verifikasi" class="mobile-nav-item w-full flex items-center gap-3.5 py-3 text-[15px] text-[#6e6e6e] hover:text-[#1a1a1a] transition-colors">
+                <svg class="w-5 h-5 text-[#6e6e6e] shrink-0" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/></svg>
+                <span>Verifikasi SK</span>
+            </button>
+
+            <button onclick="navigateTo('registrasi')" data-nav="registrasi" class="mobile-nav-item w-full flex items-center gap-3.5 py-3 text-[15px] text-[#6e6e6e] hover:text-[#1a1a1a] transition-colors">
+                <svg class="w-5 h-5 text-[#6e6e6e] shrink-0" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M4.5 3.75a3 3 0 00-3 3v10.5a3 3 0 003 3h15a3 3 0 003-3V6.75a3 3 0 00-3-3h-15zm4.125 3a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm-3.873 8.703a4.126 4.126 0 017.746 0 .75.75 0 01-.351.92 7.47 7.47 0 01-3.522.877 7.47 7.47 0 01-3.522-.877.75.75 0 01-.351-.92zM15 8.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15zM14.25 12a.75.75 0 01.75-.75h3.75a.75.75 0 010 1.5H15a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15z" clip-rule="evenodd"/></svg>
+                <span>Registrasi</span>
+            </button>
+
+            <button onclick="navigateTo('login')" data-nav="login" id="mobileAuthBtn" class="mobile-nav-item w-full flex items-center gap-3.5 py-3 text-[15px] text-[#6e6e6e] hover:text-[#1a1a1a] transition-colors">
+                <svg class="w-5 h-5 text-[#6e6e6e] shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M5.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM2.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM18.75 7.5a.75.75 0 00-1.5 0v2.25H15a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H21a.75.75 0 000-1.5h-2.25V7.5z"/></svg>
+                <span id="mobileAuthText">Login</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- 2. CONTAINER UTAMA -->
+    <main class="flex-grow w-full max-w-4xl mx-auto px-5 sm:px-6 pt-6 pb-12">
+
+        <!-- ========================================================= -->
+        <!-- VIEW 1: DETAIL SK & PENCARIAN SK                          -->
+        <!-- ========================================================= -->
+        <section id="view-verifikasi" class="view-section">
+            
+            <!-- Sub-Tampilan A: DETAIL SK (Default Utama - Identik 100% dengan Referensi) -->
+            <div id="skDetailContainer" class="max-w-lg mx-auto">
+                <!-- Judul & Status Active -->
+                <div class="mb-5">
+                    <h1 class="text-[22px] font-bold text-[#4a4a4a] tracking-tight uppercase">
+                        DETAIL SK
+                    </h1>
+                    <p id="detailActiveStatus" class="mt-2 text-[16px] font-medium text-[#5cb85c]">
+                        Active
+                    </p>
+                </div>
+
+                <!-- Card Putih Berbingkai Tipis dengan 10 Baris Field -->
+                <div class="bg-white border border-[#ebebeb] rounded-[8px] overflow-hidden">
+                    <dl id="skDetailRows" class="divide-y divide-[#f0f0f0]">
+                        <!-- 10 baris di-render via JavaScript -->
+                    </dl>
+                </div>
+
+                <!-- Baris Kontrol Khusus Pemilik (Hanya tampil jika Pemilik sudah Login) -->
+                <div id="ownerQuickBar" class="hidden mt-5 pt-4 border-t border-gray-100 flex flex-wrap items-center justify-between gap-2">
+                    <span class="text-xs font-medium text-[#5cb85c] bg-emerald-50 px-2.5 py-1 rounded">
+                        Mode Pemilik Aktif
+                    </span>
+                    <div class="flex items-center gap-2">
+                        <button type="button" onclick="editCurrentDetailSk()" class="px-3 py-1.5 text-xs font-semibold text-white bg-[#e59838] hover:bg-[#d18224] rounded-md transition-colors">
+                            Edit Data SK Ini
+                        </button>
+                        <button type="button" onclick="copyCurrentShareLink()" class="px-3 py-1.5 text-xs font-semibold text-[#1a1a1a] bg-gray-100 hover:bg-gray-200 rounded-md transition-colors">
+                            Salin Link SK
+                        </button>
+                        <button type="button" onclick="navigateTo('login')" class="px-3 py-1.5 text-xs font-semibold text-white bg-[#1e293b] hover:bg-slate-800 rounded-md transition-colors">
+                            Kelola Semua SK
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-Tampilan B: Form Pencarian SK (Dibuka melalui menu Verifikasi SK / Pencarian Data) -->
+            <div id="skSearchContainer" class="hidden max-w-lg mx-auto pt-2">
+                <div class="text-center mb-7">
+                    <h1 class="text-2xl font-medium text-[#1a1a1a]">
+                        Pencarian SK
+                    </h1>
+                </div>
+
+                <form id="skSearchForm" onsubmit="handleSkSearch(event)" class="space-y-4">
+                    <div>
+                        <label for="skSearchInput" class="block text-base font-medium text-[#1a1a1a] mb-2">
+                            No SK
+                        </label>
+                        <input 
+                            type="text" 
+                            id="skSearchInput" 
+                            placeholder="Masukkan No SK"
+                            autocomplete="off"
+                            class="w-full px-4 py-3 text-[15px] text-[#1a1a1a] bg-white border border-[#dcdcdc] rounded-lg focus:outline-none focus:border-[#e59838] transition-all"
+                        >
+                    </div>
+
+                    <button 
+                        type="submit" 
+                        class="w-full py-2.5 px-5 bg-[#e59838] hover:bg-[#d18224] text-white font-semibold text-[15px] rounded-lg transition-colors"
+                    >
+                        Cari SK
+                    </button>
+                </form>
+
+                <!-- Pesan Jika Tidak Ditemukan -->
+                <div id="skNotFoundAlert" class="hidden mt-4 p-3.5 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs sm:text-sm">
+                    Data SK tidak ditemukan. Silakan periksa kembali Nomor SK yang Anda masukkan.
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- VIEW 2: BERANDA PORTAL PILN                               -->
+        <!-- ========================================================= -->
+        <section id="view-beranda" class="view-section hidden space-y-6">
+            <div class="bg-white border border-[#ebebeb] rounded-lg p-6 sm:p-8">
+                <span class="inline-block px-2.5 py-1 rounded text-xs font-semibold bg-orange-50 text-[#d18224] mb-3">
+                    Layanan Resmi KEMDIKTISAINTEK
+                </span>
+                <h1 class="text-xl sm:text-2xl font-bold text-[#1a1a1a]">
+                    Sistem Informasi Penyetaraan Ijazah Luar Negeri (PILN)
+                </h1>
+                <p class="mt-2.5 text-sm text-[#6e6e6e] leading-relaxed">
+                    Layanan terpadu pengajuan, pemantauan status, dan verifikasi Surat Keputusan (SK) penyetaraan ijazah serta konversi nilai lulusan perguruan tinggi luar negeri.
+                </p>
+                <div class="mt-5 flex flex-wrap gap-3">
+                    <button onclick="openDefaultDetailView()" class="px-4 py-2 bg-[#e59838] hover:bg-[#d18224] text-white font-semibold text-sm rounded-lg transition-colors">
+                        Lihat Detail SK
+                    </button>
+                    <button onclick="openSearchSkForm()" class="px-4 py-2 bg-white hover:bg-gray-50 text-[#4a4a4a] border border-[#dcdcdc] font-semibold text-sm rounded-lg transition-colors">
+                        Pencarian SK
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- VIEW 3: PENGUMUMAN                                        -->
+        <!-- ========================================================= -->
+        <section id="view-pengumuman" class="view-section hidden space-y-5">
+            <div>
+                <h1 class="text-xl font-bold text-[#1a1a1a]">Pengumuman Resmi</h1>
+                <p class="text-xs sm:text-sm text-[#6e6e6e] mt-1">Informasi terbaru terkait layanan penyetaraan ijazah dan konversi nilai.</p>
+            </div>
+            <div id="announcementList" class="space-y-3.5"></div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- VIEW 4: SYARAT PENYETARAAN                                -->
+        <!-- ========================================================= -->
+        <section id="view-syarat" class="view-section hidden space-y-5">
+            <div>
+                <h1 class="text-xl font-bold text-[#1a1a1a]">Persyaratan Dokumen Penyetaraan</h1>
+                <p class="text-xs sm:text-sm text-[#6e6e6e] mt-1">Daftar dokumen wajib sesuai jenjang pendidikan luar negeri.</p>
+            </div>
+            <div class="flex border-b border-[#ebebeb] gap-2">
+                <button onclick="switchSyaratTab('s1')" id="tab-s1" class="syarat-tab px-4 py-2 text-sm font-semibold border-b-2 border-[#e59838] text-[#1a1a1a]">Sarjana (S1)</button>
+                <button onclick="switchSyaratTab('s2')" id="tab-s2" class="syarat-tab px-4 py-2 text-sm font-medium border-b-2 border-transparent text-[#6e6e6e]">Magister (S2)</button>
+                <button onclick="switchSyaratTab('s3')" id="tab-s3" class="syarat-tab px-4 py-2 text-sm font-medium border-b-2 border-transparent text-[#6e6e6e]">Doktor (S3)</button>
+            </div>
+            <div id="syaratContent" class="bg-white border border-[#ebebeb] rounded-lg p-5"></div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- VIEW 5: FAQ                                               -->
+        <!-- ========================================================= -->
+        <section id="view-faq" class="view-section hidden space-y-5">
+            <div>
+                <h1 class="text-xl font-bold text-[#1a1a1a]">Pertanyaan yang Sering Diajukan (FAQ)</h1>
+                <p class="text-xs sm:text-sm text-[#6e6e6e] mt-1">Jawaban atas pertanyaan umum seputar penyetaraan ijazah luar negeri.</p>
+            </div>
+            <div id="faqListContainer" class="space-y-3"></div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- VIEW 6: PENCARIAN PERGURUAN TINGGI LUAR NEGERI            -->
+        <!-- ========================================================= -->
+        <section id="view-ptln" class="view-section hidden space-y-5">
+            <div>
+                <h1 class="text-xl font-bold text-[#1a1a1a]">Pencarian Perguruan Tinggi Luar Negeri</h1>
+                <p class="text-xs sm:text-sm text-[#6e6e6e] mt-1">Basis data perguruan tinggi luar negeri yang terdaftar pada sistem PILN.</p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-3">
+                <input type="text" id="ptSearchInput" oninput="renderUniversityList()" placeholder="Cari nama universitas..." class="flex-grow px-3.5 py-2 text-sm border border-[#dcdcdc] rounded-lg focus:outline-none focus:border-[#e59838]">
+                <select id="ptCountryFilter" onchange="renderUniversityList()" class="px-3.5 py-2 text-sm border border-[#dcdcdc] rounded-lg bg-white focus:outline-none focus:border-[#e59838]">
+                    <option value="all">Semua Negara</option>
+                    <option value="Lebanon">Lebanon</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Inggris">Inggris</option>
+                    <option value="Mesir">Mesir</option>
+                    <option value="Jepang">Jepang</option>
+                </select>
+            </div>
+            <div id="universityListContainer" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- VIEW 7: REGISTRASI                                        -->
+        <!-- ========================================================= -->
+        <section id="view-registrasi" class="view-section hidden max-w-md mx-auto">
+            <div class="bg-white border border-[#ebebeb] rounded-lg p-6">
+                <h1 class="text-lg font-bold text-[#1a1a1a]">Registrasi Akun Pemohon</h1>
+                <p class="text-xs text-[#6e6e6e] mt-1 mb-5">Pendaftaran akun baru pemohon penyetaraan ijazah luar negeri.</p>
+                <form onsubmit="handleRegister(event)" class="space-y-3.5">
+                    <div>
+                        <label class="block text-xs font-semibold text-[#4a4a4a] mb-1">Nama Lengkap</label>
+                        <input type="text" required class="w-full px-3.5 py-2 text-sm border border-[#dcdcdc] rounded-lg focus:outline-none focus:border-[#e59838]">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-[#4a4a4a] mb-1">Email Aktif</label>
+                        <input type="email" required class="w-full px-3.5 py-2 text-sm border border-[#dcdcdc] rounded-lg focus:outline-none focus:border-[#e59838]">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-[#4a4a4a] mb-1">Kata Sandi</label>
+                        <input type="password" required class="w-full px-3.5 py-2 text-sm border border-[#dcdcdc] rounded-lg focus:outline-none focus:border-[#e59838]">
+                    </div>
+                    <button type="submit" class="w-full py-2.5 px-4 bg-[#e59838] hover:bg-[#d18224] text-white font-semibold text-sm rounded-lg transition-colors">
+                        Daftar
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- VIEW 8: LOGIN PEMILIK & DASHBOARD PENGELOLAAN DATA SK     -->
+        <!-- ========================================================= -->
+        <section id="view-login" class="view-section hidden">
+            
+            <!-- Kotak Login Pemilik (Tampil jika belum login sebagai pemilik) -->
+            <div id="ownerLoginBox" class="max-w-md mx-auto bg-white border border-[#ebebeb] rounded-lg p-6">
+                <h1 class="text-lg font-bold text-[#1a1a1a]">Login Portal PILN</h1>
+                <p class="text-xs text-[#6e6e6e] mt-1 mb-5">
+                    Akses khusus pemilik situs untuk mengelola dan memperbarui data SK di cloud.
+                </p>
+
+                <!-- Tombol Google Sign-In Utama -->
+                <button 
+                    type="button" 
+                    id="googleSignInBtn"
+                    onclick="handleGoogleOwnerLogin()" 
+                    class="w-full py-2.5 px-4 bg-white hover:bg-gray-50 border border-[#dcdcdc] text-[#1a1a1a] font-semibold text-sm rounded-lg transition-colors flex items-center justify-center gap-2.5 shadow-2xs"
+                >
+                    <svg class="w-4 h-4" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.14C3.26 21.3 7.31 24 12 24z"/>
+                        <path fill="#FBBC05" d="M5.28 14.24c-.24-.72-.38-1.49-.38-2.24s.14-1.52.38-2.24V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.99-3.14z"/>
+                        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.99 3.14c.95-2.85 3.6-4.96 6.72-4.96z"/>
+                    </svg>
+                    <span>Masuk dengan Akun Google Pemilik</span>
+                </button>
+
+                <div class="relative my-5">
+                    <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-200"></div></div>
+                    <div class="relative flex justify-center text-xs"><span class="bg-white px-2.5 text-gray-400">atau gunakan PIN Pemilik</span></div>
+                </div>
+
+                <!-- Fallback PIN Pemilik (Jika Google Popup diblokir di browser/iframe) -->
+                <form onsubmit="handlePinOwnerLogin(event)" class="space-y-3">
+                    <div>
+                        <label id="pinFieldLabel" class="block text-xs font-semibold text-[#4a4a4a] mb-1">
+                            PIN Pemilik
+                        </label>
+                        <input 
+                            type="password" 
+                            id="ownerPinInput" 
+                            required 
+                            minlength="4"
+                            placeholder="Masukkan PIN Pemilik"
+                            class="w-full px-3.5 py-2 text-sm border border-[#dcdcdc] rounded-lg focus:outline-none focus:border-[#e59838]"
+                        >
+                        <p id="pinHelperText" class="mt-1 text-[11px] text-[#6e6e6e]">
+                            Memeriksa status pemilik di cloud...
+                        </p>
+                    </div>
+                    <button type="submit" class="w-full py-2.5 px-4 bg-[#1e293b] hover:bg-slate-800 text-white font-semibold text-sm rounded-lg transition-colors">
+                        Masuk sebagai Pemilik
+                    </button>
+                </form>
+
+                <!-- Pesan Penolakan Jika Akun Bukan Pemilik -->
+                <div id="accessDeniedBanner" class="hidden mt-4 p-3 rounded-lg bg-red-50 border border-red-200 text-xs text-red-700">
+                    <strong>Akses Ditolak:</strong> Situs ini sudah terkunci untuk akun pemilik terdaftar. Hanya pemilik yang dapat mengubah data SK.
+                </div>
+            </div>
+<!-- Dashboard Pemilik (Hanya tampil setelah terverifikasi sebagai Pemilik) -->
+            <div id="ownerDashboard" class="hidden space-y-5">
+                <div class="bg-white border border-[#ebebeb] rounded-lg p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 text-[11px] font-semibold bg-emerald-50 text-[#5cb85c] border border-emerald-200 rounded">
+                                Pemilik Terverifikasi
+                            </span>
+                            <span id="ownerIdentityLabel" class="text-xs text-[#6e6e6e]"></span>
+                        </div>
+                        <h1 class="text-lg font-bold text-[#1a1a1a] mt-1">Kelola Data SK (Cloud)</h1>
+                        <p class="text-xs text-[#6e6e6e]">Perubahan tersimpan otomatis di database cloud dan langsung tampil saat link dibuka siapa pun.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button type="button" onclick="openSkFormModal()" class="px-3.5 py-2 bg-[#e59838] hover:bg-[#d18224] text-white text-xs font-semibold rounded-lg transition-colors">
+                            + Tambah SK Baru
+                        </button>
+                        <button type="button" onclick="handleOwnerLogout()" class="px-3.5 py-2 bg-gray-100 hover:bg-gray-200 text-[#4a4a4a] text-xs font-semibold rounded-lg transition-colors">
+                            Keluar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Daftar SK Tersimpan di Cloud -->
+                <div class="bg-white border border-[#ebebeb] rounded-lg overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-gray-50 border-b border-[#ebebeb] text-[11px] font-semibold text-[#6e6e6e] uppercase">
+                                    <th class="py-3 px-4">Nomor SK</th>
+                                    <th class="py-3 px-4">Nama Pemilik Ijazah</th>
+                                    <th class="py-3 px-4 hidden sm:table-cell">Hasil Kesetaraan</th>
+                                    <th class="py-3 px-4 text-right">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ownerSkTableBody" class="divide-y divide-[#f0f0f0] text-xs sm:text-sm">
+                                <!-- Diisi dinamis oleh JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL FORM EDIT / TAMBAH DATA SK (KHUSUS PEMILIK) -->
+    <div id="skFormModal" class="hidden fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white border border-[#ebebeb] rounded-lg max-w-lg w-full p-5 sm:p-6 shadow-xl my-8">
+            <div class="flex items-center justify-between pb-3 border-b border-gray-100">
+                <h2 id="modalFormTitle" class="text-base font-bold text-[#1a1a1a]">Edit Data SK</h2>
+                <button type="button" onclick="closeSkFormModal()" class="text-gray-400 hover:text-gray-600 p-1">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <form id="ownerSkForm" onsubmit="saveSkToCloud(event)" class="mt-4 space-y-3 text-sm">
+                <input type="hidden" id="editingDocId" value="">
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-semibold text-[#6e6e6e] mb-1">Status Keaktifan (Header Hijau)</label>
+                        <input type="text" id="fieldActiveState" required value="Active" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#e59838]">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-semibold text-[#6e6e6e] mb-1">Nama</label>
+                        <input type="text" id="fieldNama" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#e59838]">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-semibold text-[#6e6e6e] mb-1">Tempat, Tanggal Lahir</label>
+                        <input type="text" id="fieldTtl" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#e59838]">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-[#6e6e6e] mb-1">Negara/Wilayah</label>
+                        <input type="text" id="fieldNegara" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#e59838]">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-[#6e6e6e] mb-1">Bidang Studi</label>
+                        <input type="text" id="fieldBidang" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#e59838]">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-[#6e6e6e] mb-1">Gelar</label>
+                        <input type="text" id="fieldGelar" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#e59838]">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-[#6e6e6e] mb-1">Hasil Kesetaraan</label>
+                        <input type="text" id="fieldKesetaraan" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#e59838]">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-semibold text-[#6e6e6e] mb-1">Nomor SK Penyetaraan</label>
+                        <input type="text" id="fieldNoSkPenyetaraan" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#e59838]">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-semibold text-[#6e6e6e] mb-1">Nomor SK Konversi Nilai</label>
+                        <input type="text" id="fieldNoSkKonversi" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#e59838]">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-[#6e6e6e] mb-1">Hasil Konversi Nilai</label>
+                        <input type="text" id="fieldNilai" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#e59838]">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-[#6e6e6e] mb-1">Status</label>
+                        <input type="text" id="fieldStatus" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#e59838]">
+                    </div>
+                </div>
+
+                <div class="pt-4 flex justify-end gap-2 border-t border-gray-100">
+                    <button type="button" onclick="closeSkFormModal()" class="px-4 py-2 text-xs font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg">Batal</button>
+                    <button type="submit" id="saveSkSubmitBtn" class="px-4 py-2 text-xs font-semibold text-white bg-[#e59838] hover:bg-[#d18224] rounded-lg">Simpan ke Cloud</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFIKASI HALUS -->
+    <div id="toastBox" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-opacity duration-200">
+        <div id="toastText" class="bg-[#1e293b] text-white text-xs font-medium px-4 py-2.5 rounded-lg shadow-lg">
+            Notifikasi
+        </div>
+    </div>
+    <!-- FIREBASE CLOUD & APLIKASI UTAMA -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { 
+            getAuth, 
+            signInAnonymously, 
+            signInWithCustomToken, 
+            GoogleAuthProvider, 
+            signInWithPopup, 
+            onAuthStateChanged 
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { 
+            getFirestore, 
+            doc, 
+            getDoc, 
+            setDoc, 
+            addDoc, 
+            updateDoc, 
+            deleteDoc, 
+            onSnapshot, 
+            collection 
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // =========================================================================
+        // 1. INISIALISASI FIREBASE & KONFIGURASI PATH STRICT
+        // =========================================================================
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Koleksi Publik untuk Data SK agar bisa diakses siapa saja yang membuka link
+        const skCollectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'sk_records');
+        // Dokumen Konfigurasi Pemilik (Mengunci hak edit hanya untuk pemilik pertama)
+        const ownerLockDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'portal_config', 'owner_lock');
+
+        // Data awal persis seperti gambar referensi
+        const DEFAULT_SK_DATA = {
+            nama: 'Muhammad Dani Saut Maruli',
+            ttl: 'Bandar Lampung, 14 Mei 1999',
+            negara: 'Lebanon',
+            bidang: 'Political Science',
+            gelar: 'Bachelor',
+            noSkPenyetaraan: '1307/Dikti/Kep/IJLN/2026',
+            noSkKonversi: '1307/Dikti/Kep/IJLN/2026',
+            hasilKesetaraan: 'Sarjana',
+            hasilKonversi: '3.13',
+            status: 'Usulan Selesai Diproses',
+            activeState: 'Active',
+            isDefault: true
+        };
+
+        // State Aplikasi
+        let currentUser = null;
+        let skRecordsList = [];
+        let activeSkRecord = null;
+        let ownerConfig = null; // { ownerGoogleUid, ownerEmail, ownerPinHash }
+        let isOwnerVerified = false;
+        let verifiedOwnerLabel = '';
+
+        // =========================================================================
+        // 2. AUTENTIKASI & SINKRONISASI REALTIME CLOUD
+        // =========================================================================
+        async function initAuthAndSync() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (err) {
+                console.error("Kesalahan autentikasi awal:", err);
+                try {
+                    await signInAnonymously(auth);
+                } catch (e) {
+                    console.error("Fallback anonymous gagal:", e);
+                }
+            }
+        }
+
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) return;
+            currentUser = user;
+
+            // 1. Pantau status penguncian pemilik secara realtime
+            onSnapshot(ownerLockDocRef, (snap) => {
+                if (snap.exists()) {
+                    ownerConfig = snap.data();
+                } else {
+                    ownerConfig = null;
+                }
+                updateOwnerLoginUIHints();
+
+                // Jika user sedang login via Google dan cocok dengan ownerGoogleUid
+                if (user && !user.isAnonymous && ownerConfig && ownerConfig.ownerGoogleUid === user.uid) {
+                    grantOwnerAccess(user.email || 'Akun Google Pemilik');
+                }
+            }, (err) => {
+                console.error("Gagal memuat konfigurasi pemilik:", err);
+            });
+
+            // 2. Pantau koleksi data SK secara realtime
+            onSnapshot(skCollectionRef, async (snapshot) => {
+                if (snapshot.empty) {
+                    // Inisialisasi data default pertama kali di cloud
+                    try {
+                        await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'sk_records', 'default_1307'), DEFAULT_SK_DATA);
+                    } catch (seedErr) {
+                        console.error("Gagal membuat data SK awal:", seedErr);
+                    }
+                    return;
+                }
+
+                skRecordsList = snapshot.docs.map(d => ({
+                    id: d.id,
+                    ...d.data()
+                }));
+
+                // Refresh tampilan jika sedang membuka detail atau dashboard pemilik
+                syncViewWithUrlAndData();
+                if (isOwnerVerified) {
+                    renderOwnerSkTable();
+                }
+            }, (err) => {
+                console.error("Gagal menyinkronkan data SK:", err);
+                // Fallback render data default jika offline
+                if (skRecordsList.length === 0) {
+                    skRecordsList = [{ id: 'default_1307', ...DEFAULT_SK_DATA }];
+                    renderSkDetailCard(skRecordsList[0]);
+                }
+            });
+        });
+
+        // Tampilkan data default seketika saat halaman baru dimuat sebelum koneksi selesai
+        renderSkDetailCard({ id: 'default_1307', ...DEFAULT_SK_DATA });
+        initAuthAndSync();
+
+        // =========================================================================
+        // 3. LOGIKA PENGUNCIAN & LOGIN KHUSUS PEMILIK
+        // =========================================================================
+        function updateOwnerLoginUIHints() {
+            const pinLabel = document.getElementById('pinFieldLabel');
+            const pinHelper = document.getElementById('pinHelperText');
+            const pinInput = document.getElementById('ownerPinInput');
+
+            if (!ownerConfig) {
+                pinLabel.textContent = 'Buat PIN Pemilik Baru (Aktivasi Pertama)';
+                pinInput.placeholder = 'Buat PIN rahasia minimal 4 karakter';
+                pinHelperText.textContent = 'Belum ada pemilik terdaftar. Login pertama kali akan mengunci hak edit hanya untuk Anda.';
+            } else {
+                pinLabel.textContent = 'PIN Pemilik Terdaftar';
+                pinInput.placeholder = 'Masukkan PIN Pemilik Anda';
+                const maskedEmail = ownerConfig.ownerEmail ? ` (${maskEmail(ownerConfig.ownerEmail)})` : '';
+                pinHelper.textContent = `Akses edit dikunci untuk pemilik situs${maskedEmail}.`;
+            }
+        }
+
+        function maskEmail(email) {
+            if (!email || !email.includes('@')) return '';
+            const [name, domain] = email.split('@');
+            if (name.length <= 2) return `${name[0]}***@${domain}`;
+            return `${name.slice(0, 2)}***@${domain}`;
+        }
+
+        async function simpleHashPin(pinText) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(`kemdikti_piln_${pinText}`);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        window.handleGoogleOwnerLogin = async function() {
+            if (!currentUser) {
+                showToast('Menghubungkan ke server...');
+                return;
+            }
+            const deniedBanner = document.getElementById('accessDeniedBanner');
+            deniedBanner.classList.add('hidden');
+
+            try {
+                const provider = new GoogleAuthProvider();
+                const result = await signInWithPopup(auth, provider);
+                const googleUser = result.user;
+
+                // Cek apakah sudah ada pemilik terdaftar
+                const lockSnap = await getDoc(ownerLockDocRef);
+                if (!lockSnap.exists()) {
+                    // Daftarkan Google User ini sebagai satu-satunya pemilik
+                    await setDoc(ownerLockDocRef, {
+                        ownerGoogleUid: googleUser.uid,
+                        ownerEmail: googleUser.email || '',
+                        createdAt: new Date().toISOString()
+                    });
+                    grantOwnerAccess(googleUser.email || 'Pemilik Google');
+                    showToast('Akun Google Anda berhasil didaftarkan sebagai Pemilik Situs!');
+                } else {
+                    const data = lockSnap.data();
+                    if (!data.ownerGoogleUid) {
+                        // Jika sebelumnya pemilik baru mengatur PIN, tautkan akun Google pertama ini
+                        await updateDoc(ownerLockDocRef, {
+                            ownerGoogleUid: googleUser.uid,
+                            ownerEmail: googleUser.email || ''
+                        });
+                        grantOwnerAccess(googleUser.email || 'Pemilik Google');
+                        showToast('Akun Google ditautkan ke profil Pemilik Situs!');
+                    } else if (data.ownerGoogleUid === googleUser.uid) {
+                        grantOwnerAccess(googleUser.email || 'Pemilik Google');
+                        showToast('Selamat datang kembali, Pemilik!');
+                    } else {
+                        // Tolak akun Google lain & kembalikan ke sesi anonim
+                        deniedBanner.classList.remove('hidden');
+                        await signInAnonymously(auth);
+                    }
+                }
+            } catch (error) {
+                console.warn('Google Sign-In tidak tersedia di lingkungan ini:', error);
+                showToast('Gunakan PIN Pemilik di bawah untuk masuk.');
+            }
+        };
+
+        window.handlePinOwnerLogin = async function(e) {
+            e.preventDefault();
+            if (!currentUser) {
+                showToast('Menghubungkan ke database cloud...');
+                return;
+            }
+
+            const pinValue = document.getElementById('ownerPinInput').value.trim();
+            const deniedBanner = document.getElementById('accessDeniedBanner');
+            deniedBanner.classList.add('hidden');
+
+            if (pinValue.length < 4) {
+                showToast('PIN minimal 4 karakter');
+                return;
+            }
+
+            try {
+                const hashed = await simpleHashPin(pinValue);
+                const lockSnap = await getDoc(ownerLockDocRef);
+
+                if (!lockSnap.exists()) {
+                    // Aktivasi pertama: kunci pemilik dengan PIN ini
+                    await setDoc(ownerLockDocRef, {
+                        ownerPinHash: hashed,
+                        createdAt: new Date().toISOString()
+                    });
+                    grantOwnerAccess('Pemilik (PIN)');
+                    document.getElementById('ownerPinInput').value = '';
+                    showToast('PIN Pemilik berhasil dibuat! Akses edit dikunci untuk Anda.');
+                } else {
+                    const data = lockSnap.data();
+                    if (!data.ownerPinHash) {
+                        // Jika pemilik sebelumnya login pakai Google dan ingin set PIN cadangan
+                        if (auth.currentUser && !auth.currentUser.isAnonymous && data.ownerGoogleUid === auth.currentUser.uid) {
+                            await updateDoc(ownerLockDocRef, { ownerPinHash: hashed });
+                            grantOwnerAccess(data.ownerEmail || 'Pemilik');
+                            showToast('PIN cadangan berhasil disimpan');
+                        } else {
+                            deniedBanner.classList.remove('hidden');
+                        }
+                    } else if (data.ownerPinHash === hashed) {
+                        grantOwnerAccess(data.ownerEmail || 'Pemilik Terverifikasi');
+                        document.getElementById('ownerPinInput').value = '';
+                        showToast('Berhasil masuk sebagai Pemilik');
+                    } else {
+                        deniedBanner.classList.remove('hidden');
+                    }
+                }
+            } catch (err) {
+                console.error('Gagal memverifikasi PIN:', err);
+                showToast('Terjadi kesalahan saat verifikasi');
+            }
+        };
+      function grantOwnerAccess(label) {
+            isOwnerVerified = true;
+            verifiedOwnerLabel = label;
+
+            document.getElementById('ownerLoginBox').classList.add('hidden');
+            document.getElementById('ownerDashboard').classList.remove('hidden');
+            document.getElementById('ownerIdentityLabel').textContent = label;
+            document.getElementById('ownerQuickBar').classList.remove('hidden');
+
+            document.getElementById('desktopAuthText').textContent = 'Kelola SK';
+            document.getElementById('mobileAuthText').textContent = 'Kelola SK';
+
+            renderOwnerSkTable();
+        }
+
+        window.handleOwnerLogout = async function() {
+            isOwnerVerified = false;
+            verifiedOwnerLabel = '';
+
+            document.getElementById('ownerDashboard').classList.add('hidden');
+            document.getElementById('ownerLoginBox').classList.remove('hidden');
+            document.getElementById('ownerQuickBar').classList.add('hidden');
+
+            document.getElementById('desktopAuthText').textContent = 'Login';
+            document.getElementById('mobileAuthText').textContent = 'Login';
+
+            try {
+                await signInAnonymously(auth);
+            } catch (e) {}
+
+            showToast('Keluar dari mode pemilik');
+        };
+
+        // =========================================================================
+        // 4. CRUD DATA SK DI FIRESTORE (KHUSUS PEMILIK)
+        // =========================================================================
+        function renderOwnerSkTable() {
+            const tbody = document.getElementById('ownerSkTableBody');
+            tbody.innerHTML = skRecordsList.map(sk => `
+                <tr class="hover:bg-gray-50/70">
+                    <td class="py-3 px-4 font-semibold text-[#1a1a1a]">${escapeHtml(sk.noSkPenyetaraan)}</td>
+                    <td class="py-3 px-4 text-[#4a4a4a]">${escapeHtml(sk.nama)}</td>
+                    <td class="py-3 px-4 hidden sm:table-cell text-[#6e6e6e]">${escapeHtml(sk.hasilKesetaraan)} (${escapeHtml(sk.hasilKonversi)})</td>
+                    <td class="py-3 px-4 text-right whitespace-nowrap space-x-1">
+                        <button type="button" onclick="viewSkRecordById('${sk.id}')" class="px-2.5 py-1 text-xs font-medium text-[#5cb85c] bg-emerald-50 hover:bg-emerald-100 rounded">Buka</button>
+                        <button type="button" onclick="copyShareLinkBySkNo('${encodeURIComponent(sk.noSkPenyetaraan)}')" class="px-2.5 py-1 text-xs font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded">Salin Link</button>
+                        <button type="button" onclick="openSkFormModal('${sk.id}')" class="px-2.5 py-1 text-xs font-medium text-[#d18224] bg-orange-50 hover:bg-orange-100 rounded">Edit</button>
+                        <button type="button" onclick="deleteSkFromCloud('${sk.id}')" class="px-2.5 py-1 text-xs font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded">Hapus</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        window.viewSkRecordById = function(docId) {
+            const found = skRecordsList.find(s => s.id === docId);
+            if (found) {
+                navigateTo('verifikasi', { skipRouteSync: true });
+                showDetailContainerOnly();
+                renderSkDetailCard(found);
+                syncUrlQueryParam(found.noSkPenyetaraan);
+            }
+        };
+
+        window.editCurrentDetailSk = function() {
+            if (!isOwnerVerified) return;
+            const targetId = activeSkRecord ? activeSkRecord.id : (skRecordsList[0]?.id || 'default_1307');
+            openSkFormModal(targetId);
+        };
+
+        window.openSkFormModal = function(docId = '') {
+            if (!isOwnerVerified) {
+                showToast('Hanya pemilik yang dapat mengedit data');
+                return;
+            }
+            const modal = document.getElementById('skFormModal');
+            const title = document.getElementById('modalFormTitle');
+            document.getElementById('editingDocId').value = docId;
+
+            if (docId) {
+                const sk = skRecordsList.find(s => s.id === docId);
+                if (sk) {
+                    title.textContent = 'Edit Data SK Penyetaraan';
+                    document.getElementById('fieldActiveState').value = sk.activeState || 'Active';
+                    document.getElementById('fieldNama').value = sk.nama || '';
+                    document.getElementById('fieldTtl').value = sk.ttl || '';
+                    document.getElementById('fieldNegara').value = sk.negara || '';
+                    document.getElementById('fieldBidang').value = sk.bidang || '';
+                    document.getElementById('fieldGelar').value = sk.gelar || '';
+                    document.getElementById('fieldKesetaraan').value = sk.hasilKesetaraan || '';
+                    document.getElementById('fieldNoSkPenyetaraan').value = sk.noSkPenyetaraan || '';
+                    document.getElementById('fieldNoSkKonversi').value = sk.noSkKonversi || '';
+                    document.getElementById('fieldNilai').value = sk.hasilKonversi || '';
+                    document.getElementById('fieldStatus').value = sk.status || '';
+                }
+            } else {
+                title.textContent = 'Tambah Data SK Baru';
+                document.getElementById('ownerSkForm').reset();
+                document.getElementById('fieldActiveState').value = 'Active';
+                document.getElementById('fieldStatus').value = 'Usulan Selesai Diproses';
+            }
+
+            modal.classList.remove('hidden');
+        };
+
+        window.closeSkFormModal = function() {
+            document.getElementById('skFormModal').classList.add('hidden');
+        };
+
+        window.saveSkToCloud = async function(e) {
+            e.preventDefault();
+            if (!isOwnerVerified || !currentUser) {
+                showToast('Akses ditolak');
+                return;
+            }
+
+            const btn = document.getElementById('saveSkSubmitBtn');
+            btn.disabled = true;
+            btn.textContent = 'Menyimpan...';
+
+            const docId = document.getElementById('editingDocId').value.trim();
+            const payload = {
+                activeState: document.getElementById('fieldActiveState').value.trim() || 'Active',
+                nama: document.getElementById('fieldNama').value.trim(),
+                ttl: document.getElementById('fieldTtl').value.trim(),
+                negara: document.getElementById('fieldNegara').value.trim(),
+                bidang: document.getElementById('fieldBidang').value.trim(),
+                gelar: document.getElementById('fieldGelar').value.trim(),
+                hasilKesetaraan: document.getElementById('fieldKesetaraan').value.trim(),
+                noSkPenyetaraan: document.getElementById('fieldNoSkPenyetaraan').value.trim(),
+                noSkKonversi: document.getElementById('fieldNoSkKonversi').value.trim(),
+                hasilKonversi: document.getElementById('fieldNilai').value.trim(),
+                status: document.getElementById('fieldStatus').value.trim(),
+                updatedAt: new Date().toISOString()
+            };
+
+            try {
+                if (docId) {
+                    const targetRef = doc(db, 'artifacts', appId, 'public', 'data', 'sk_records', docId);
+                    await setDoc(targetRef, payload, { merge: true });
+                    showToast('Perubahan SK berhasil disimpan ke cloud!');
+                } else {
+                    await addDoc(skCollectionRef, payload);
+                    showToast('Data SK baru berhasil ditambahkan ke cloud!');
+                }
+                closeSkFormModal();
+            } catch (err) {
+                console.error('Gagal menyimpan SK:', err);
+                showToast('Gagal menyimpan data ke cloud');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Simpan ke Cloud';
+            }
+        };
+
+        window.deleteSkFromCloud = async function(docId) {
+            if (!isOwnerVerified || !currentUser) return;
+            if (skRecordsList.length <= 1) {
+                showToast('Minimal harus menyisakan 1 data SK utama');
+                return;
+            }
+            try {
+                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'sk_records', docId));
+                showToast('Data SK berhasil dihapus dari cloud');
+            } catch (err) {
+                console.error('Gagal menghapus SK:', err);
+                showToast('Gagal menghapus data SK');
+            }
+        };
+
+        // =========================================================================
+        // 5. RENDER TAMPILAN DETAIL SK & ROUTING URL (?no=...)
+        // =========================================================================
+        function renderSkDetailCard(skRecord) {
+            activeSkRecord = skRecord;
+            document.getElementById('detailActiveStatus').textContent = skRecord.activeState || 'Active';
+
+            const rows = [
+                { label: 'Nama', value: skRecord.nama },
+                { label: 'Tempat, Tanggal Lahir', value: skRecord.ttl },
+                { label: 'Negara/Wilayah', value: skRecord.negara },
+                { label: 'Bidang Studi', value: skRecord.bidang },
+                { label: 'Gelar', value: skRecord.gelar },
+                { label: 'Nomor SK Penyetaraan', value: skRecord.noSkPenyetaraan },
+                { label: 'Nomor SK Konversi Nilai', value: skRecord.noSkKonversi },
+                { label: 'Hasil Kesetaraan', value: skRecord.hasilKesetaraan },
+                { label: 'Hasil Konversi Nilai', value: skRecord.hasilKonversi },
+                { label: 'Status', value: skRecord.status }
+            ];
+
+            const rowsContainer = document.getElementById('skDetailRows');
+            rowsContainer.innerHTML = rows.map(row => `
+                <div class="px-5 py-4">
+                    <dt class="text-[13.5px] font-normal text-[#6e6e6e]">${escapeHtml(row.label)}</dt>
+                    <dd class="mt-1 text-[15px] font-bold text-[#4a4a4a] break-words">${escapeHtml(row.value)}</dd>
+                </div>
+            `).join('');
+        }
+
+        function showDetailContainerOnly() {
+            document.getElementById('skSearchContainer').classList.add('hidden');
+            document.getElementById('skDetailContainer').classList.remove('hidden');
+        }
+
+        window.openDefaultDetailView = function() {
+            navigateTo('verifikasi', { skipRouteSync: true });
+            showDetailContainerOnly();
+            const target = activeSkRecord || skRecordsList[0] || { id: 'default_1307', ...DEFAULT_SK_DATA };
+            renderSkDetailCard(target);
+            syncUrlQueryParam(target.noSkPenyetaraan);
+        };
+
+        window.openSearchSkForm = function() {
+            navigateTo('verifikasi', { skipRouteSync: true });
+            document.getElementById('skDetailContainer').classList.add('hidden');
+            document.getElementById('skSearchContainer').classList.remove('hidden');
+            document.getElementById('skNotFoundAlert').classList.add('hidden');
+        };
+
+        window.handleSkSearch = function(e) {
+            e.preventDefault();
+            const query = document.getElementById('skSearchInput').value.trim().toLowerCase();
+            const alertBox = document.getElementById('skNotFoundAlert');
+
+            if (!query) {
+                showToast('Masukkan Nomor SK terlebih dahulu');
+                return;
+            }
+
+            const found = skRecordsList.find(item => 
+                (item.noSkPenyetaraan && item.noSkPenyetaraan.toLowerCase() === query) ||
+                (item.noSkKonversi && item.noSkKonversi.toLowerCase() === query) ||
+                (item.noSkPenyetaraan && item.noSkPenyetaraan.toLowerCase().includes(query)) ||
+                (item.nama && item.nama.toLowerCase().includes(query))
+            );
+
+            if (found) {
+                alertBox.classList.add('hidden');
+                showDetailContainerOnly();
+                renderSkDetailCard(found);
+                syncUrlQueryParam(found.noSkPenyetaraan);
+            } else {
+                alertBox.classList.remove('hidden');
+            }
+        };
+
+        function syncUrlQueryParam(skNumber) {
+            if (!skNumber) return;
+            try {
+                const url = new URL(window.location.href);
+                url.searchParams.set('no', skNumber);
+                window.history.replaceState(null, '', url.toString());
+            } catch (e) {
+                // Fallback jika berada di sandbox iframe
+            }
+        }
+
+        function getRequestedSkNumberFromUrl() {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.get('no')) return decodeURIComponent(urlParams.get('no')).trim();
+
+                const rawHash = window.location.hash || '';
+                if (rawHash.includes('?')) {
+                    const hashParams = new URLSearchParams(rawHash.split('?')[1]);
+                    if (hashParams.get('no')) return decodeURIComponent(hashParams.get('no')).trim();
+                }
+            } catch (e) {}
+            return '';
+        }
+
+        function syncViewWithUrlAndData() {
+            if (skRecordsList.length === 0) return;
+
+            const requestedNo = getRequestedSkNumberFromUrl();
+            if (requestedNo) {
+                const matched = skRecordsList.find(s => 
+                    (s.noSkPenyetaraan && s.noSkPenyetaraan.toLowerCase() === requestedNo.toLowerCase()) ||
+                    (s.noSkKonversi && s.noSkKonversi.toLowerCase() === requestedNo.toLowerCase())
+                );
+                if (matched) {
+                    renderSkDetailCard(matched);
+                    return;
+                }
+            }
+
+            // Jika sedang melihat record yang baru diedit, perbarui datanya secara live
+            if (activeSkRecord) {
+                const updatedCurrent = skRecordsList.find(s => s.id === activeSkRecord.id);
+                if (updatedCurrent) {
+                    renderSkDetailCard(updatedCurrent);
+                    return;
+                }
+            }
+
+            // Default tampilkan SK pertama yang tersimpan di cloud
+            renderSkDetailCard(skRecordsList[0]);
+        }
+
+        window.copyCurrentShareLink = function() {
+            const skNo = activeSkRecord ? activeSkRecord.noSkPenyetaraan : DEFAULT_SK_DATA.noSkPenyetaraan;
+            copyShareLinkBySkNo(encodeURIComponent(skNo));
+        };
+
+        window.copyShareLinkBySkNo = function(encodedSkNo) {
+            try {
+                const url = new URL(window.location.href.split('#')[0]);
+                url.searchParams.set('no', decodeURIComponent(encodedSkNo));
+                copyTextFallback(url.toString(), 'Link SK berhasil disalin! Siap dibagikan.');
+            } catch (e) {
+                copyTextFallback(`${window.location.origin}${window.location.pathname}?no=${encodedSkNo}`, 'Link SK berhasil disalin!');
+            }
+        };
+
+        function copyTextFallback(text, msg) {
+            const temp = document.createElement('input');
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            showToast(msg);
+        }
+
+        // =========================================================================
+        // 6. NAVIGASI MENU & HALAMAN PENDUKUNG
+        // =========================================================================
+        window.navigateTo = function(viewName) {
+            document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
+            const target = document.getElementById(`view-${viewName}`);
+            if (target) target.classList.remove('hidden');
+
+            const mobileDrawer = document.getElementById('mobileDrawer');
+            const mobileToggle = document.getElementById('mobileMenuToggle');
+            if (!mobileDrawer.classList.contains('hidden')) {
+                mobileDrawer.classList.add('hidden');
+                mobileToggle.setAttribute('aria-expanded', 'false');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        document.getElementById('mobileMenuToggle').addEventListener('click', () => {
+            const drawer = document.getElementById('mobileDrawer');
+            const btn = document.getElementById('mobileMenuToggle');
+            const isHidden = drawer.classList.contains('hidden');
+            drawer.classList.toggle('hidden');
+            btn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+        });
+
+        window.toggleMobileSubmenu = function() {
+            document.getElementById('mobileSearchSubmenu').classList.toggle('hidden');
+            document.getElementById('mobileSubmenuCaret').classList.toggle('rotate-180');
+        };
+
+        window.toggleDesktopDropdown = function() {
+            document.getElementById('desktopSearchDropdown').classList.toggle('hidden');
+            document.getElementById('desktopDropdownArrow').classList.toggle('rotate-180');
+        };
+
+        window.closeDesktopDropdown = function() {
+            document.getElementById('desktopSearchDropdown').classList.add('hidden');
+            document.getElementById('desktopDropdownArrow').classList.remove('rotate-180');
+        };
+
+        document.addEventListener('click', (e) => {
+            const wrapper = document.getElementById('desktopSearchDropdownWrapper');
+            if (wrapper && !wrapper.contains(e.target)) {
+                window.closeDesktopDropdown();
+            }
+        });
+
+        // Konten Statis Halaman Pendukung
+        const announcementsData = [
+            { category: 'Layanan', date: '14 November 2026', title: 'Pembaruan Sistem Verifikasi Elektronik SK Penyetaraan Ijazah Luar Negeri', summary: 'Seluruh Surat Keputusan (SK) penyetaraan ijazah kini terintegrasi pada portal verifikasi daring KEMDIKTISAINTEK.' },
+            { category: 'Regulasi', date: '02 Oktober 2026', title: 'Pedoman Konversi Nilai Indeks Prestasi Kumulatif (IPK) Lulusan Luar Negeri', summary: 'Penyesuaian tabel ekuivalensi skala penilaian akademik lintas negara guna mempercepat penerbitan SK Konversi Nilai.' }
+        ];
+
+        const syaratData = {
+            s1: { title: 'Persyaratan Jenjang Sarjana (S1 / Bachelor)', items: ['Scan asli Ijazah Sarjana (Bachelor Degree).', 'Scan asli Transkrip Akademik lengkap.', 'Terjemahan tersumpah ke dalam Bahasa Indonesia atau Bahasa Inggris.', 'Scan halaman identitas Paspor dan visa pelajar selama masa studi.'] },
+            s2: { title: 'Persyaratan Jenjang Magister (S2 / Master)', items: ['Scan asli Ijazah Magister dan Transkrip Nilai lengkap.', 'Scan Ijazah S1 atau SK Penyetaraan Ijazah S1.', 'Softcopy Tesis / Karya Akhir.', 'Terjemahan tersumpah dokumen non-Inggris/Indonesia.'] },
+            s3: { title: 'Persyaratan Jenjang Doktor (S3 / Ph.D)', items: ['Scan asli Ijazah Doktor dan Transkrip Akademik.', 'Scan Ijazah S1 dan S2 beserta transkripnya.', 'Softcopy Disertasi dan bukti publikasi ilmiah internasional.'] }
+        };
+
+        const faqData = [
+            { q: 'Berapa lama proses penyetaraan ijazah luar negeri hingga SK terbit?', a: 'Proses penilaian membutuhkan waktu rata-rata 7 hingga 14 hari kerja sejak berkas dinyatakan lengkap.' },
+            { q: 'Bagaimana cara mengecek keaslian SK Penyetaraan yang sudah terbit?', a: 'Buka menu Verifikasi SK, masukkan Nomor SK pada kolom pencarian untuk menampilkan rincian resmi status SK.' }
+        ];
+
+        const universitiesData = [
+            { name: 'American University of Beirut (AUB)', country: 'Lebanon', city: 'Beirut', status: 'Terakreditasi Penuh' },
+            { name: 'Lebanese American University (LAU)', country: 'Lebanon', city: 'Beirut', status: 'Terakreditasi Penuh' },
+            { name: 'University of Melbourne', country: 'Australia', city: 'Melbourne', status: 'Terakreditasi Penuh' },
+            { name: 'University of Oxford', country: 'Inggris', city: 'Oxford', status: 'Terakreditasi Penuh' },
+            { name: 'Al-Azhar University', country: 'Mesir', city: 'Kairo', status: 'Terakreditasi Penuh' },
+            { name: 'The University of Tokyo', country: 'Jepang', city: 'Tokyo', status: 'Terakreditasi Penuh' }
+        ];
+
+        document.getElementById('announcementList').innerHTML = announcementsData.map(item => `
+            <article class="bg-white border border-[#ebebeb] rounded-lg p-5">
+                <div class="flex items-center gap-2 text-xs mb-1.5">
+                    <span class="px-2 py-0.5 rounded font-semibold bg-orange-50 text-[#d18224]">${item.category}</span>
+                    <span class="text-[#6e6e6e]">${item.date}</span>
+                </div>
+                <h2 class="text-sm sm:text-base font-bold text-[#1a1a1a]">${item.title}</h2>
+                <p class="mt-1 text-xs sm:text-sm text-[#6e6e6e]">${item.summary}</p>
+            </article>
+        `).join('');
+
+        window.switchSyaratTab = function(level) {
+            ['s1', 's2', 's3'].forEach(key => {
+                const tab = document.getElementById(`tab-${key}`);
+                tab.className = key === level 
+                    ? 'syarat-tab px-4 py-2 text-sm font-semibold border-b-2 border-[#e59838] text-[#1a1a1a]' 
+                    : 'syarat-tab px-4 py-2 text-sm font-medium border-b-2 border-transparent text-[#6e6e6e]';
+            });
+            const data = syaratData[level];
+            document.getElementById('syaratContent').innerHTML = `
+                <h2 class="text-base font-bold text-[#1a1a1a] mb-3">${data.title}</h2>
+                <ul class="space-y-2.5">
+                    ${data.items.map((t, i) => `<li class="text-xs sm:text-sm text-[#4a4a4a] flex gap-2.5"><span class="font-bold text-[#5cb85c]">${i + 1}.</span><span>${t}</span></li>`).join('')}
+                </ul>
+            `;
+        };
+        window.switchSyaratTab('s1');
+
+        document.getElementById('faqListContainer').innerHTML = faqData.map((item, idx) => `
+            <details class="bg-white border border-[#ebebeb] rounded-lg overflow-hidden" ${idx === 0 ? 'open' : ''}>
+                <summary class="px-4 py-3.5 cursor-pointer font-semibold text-sm text-[#1a1a1a]">${item.q}</summary>
+                <div class="px-4 pb-3.5 text-xs sm:text-sm text-[#6e6e6e] border-t border-gray-50 pt-2">${item.a}</div>
+            </details>
+        `).join('');
+
+        window.renderUniversityList = function() {
+            const q = document.getElementById('ptSearchInput').value.trim().toLowerCase();
+            const c = document.getElementById('ptCountryFilter').value;
+            const filtered = universitiesData.filter(u => (u.name.toLowerCase().includes(q) || u.city.toLowerCase().includes(q)) && (c === 'all' || u.country === c));
+            document.getElementById('universityListContainer').innerHTML = filtered.map(u => `
+                <div class="bg-white border border-[#ebebeb] rounded-lg p-4 flex items-center justify-between gap-2">
+                    <div>
+                        <h3 class="font-bold text-sm text-[#1a1a1a]">${u.name}</h3>
+                        <p class="text-xs text-[#6e6e6e] mt-0.5">${u.city}, ${u.country}</p>
+                    </div>
+                    <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-50 text-[#5cb85c]">${u.status}</span>
+                </div>
+            `).join('');
+        };
+        window.renderUniversityList();
+
+        window.handleRegister = function(e) {
+            e.preventDefault();
+            showToast('Pendaftaran pemohon berhasil dikirim');
+            e.target.reset();
+        };
+
+        let toastTimer = null;
+        function showToast(msg) {
+            const box = document.getElementById('toastBox');
+            document.getElementById('toastText').textContent = msg;
+            box.classList.remove('opacity-0');
+            box.classList.add('opacity-100');
+            if (toastTimer) clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                box.classList.remove('opacity-100');
+                box.classList.add('opacity-0');
+            }, 2600);
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+    </script>
+</body>
+</html>
+```
