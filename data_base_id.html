@@ -1668,11 +1668,9 @@
       navigateTo("detail-sk", false);
     }
 
-    function buildCustomSKUrl(slug) {
-      const records = getRecords();
-      const payloadToken = SKPayloadCodec.encode(records);
+        function buildCustomSKUrl(slug) {
       const base = window.location.origin + window.location.pathname;
-      return `${base}?sk=${encodeURIComponent(slug)}#p=${payloadToken}`;
+      return `${base}?sk=${encodeURIComponent(slug)}`;
     }
 
     // =========================================================================
